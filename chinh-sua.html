@@ -521,11 +521,15 @@
 
         <div class="grid-2">
           <div>
-            <label for="qrTemplate">Chọn mẫu phôi thiệp 20/10:</label>
-            <select id="qrTemplate" onchange="renderHeartQRCard()">
-              <option value="cb44">🐰 Mẫu 1: Bó hoa hồng & Thỏ trắng (Chuẩn video TikTok)</option>
-              <option value="bd2c">🌷 Mẫu 2: Khung tim vàng hồng & Thỏ trắng</option>
-              <option value="71c7">🌸 Mẫu 3: Thiệp hoa 20/10 nghiêng nhẹ</option>
+            <label for="qrTemplate">Chọn mẫu ảnh nền Thiệp QR:</label>
+            <select id="qrTemplate" onchange="onQrTemplateChange()">
+              <option value="gui_chi">🌹 Hoa Hồng Đỏ & Giấy Đen — "Gửi Chị" (Mặc định)</option>
+              <option value="thinhduc_gui_chi">🌹 Hoa Hồng Đỏ & Giấy Đen — "thinhduc / Gửi Chị"</option>
+              <option value="red_black">🌹 Hoa Hồng Đỏ & Giấy Đen — "thinhduc / tặng Giang"</option>
+              <option value="custom_clean">✏️ Hoa Hồng Đỏ & Giấy Đen — Tự gõ chữ tùy ý lên ảnh QR</option>
+              <option value="cb44">🐰 Mẫu Hồng Phấn: Bó hoa hồng & Thỏ trắng (Gốc)</option>
+              <option value="bd2c">🌷 Mẫu Hồng Phấn: Khung tim vàng hồng & Thỏ trắng</option>
+              <option value="71c7">🌸 Mẫu Hồng Phấn: Thiệp hoa 20/10 nghiêng nhẹ</option>
             </select>
           </div>
           <div>
@@ -535,6 +539,17 @@
               <option value="#d6336c">💗 Hồng Đậm (#d6336c)</option>
               <option value="#9f1239">🍷 Đỏ Rượu Vang (#9f1239)</option>
             </select>
+          </div>
+        </div>
+
+        <div id="customQrTextFields" style="display:none;margin-top:4px;" class="grid-2">
+          <div>
+            <label for="qrTopBadgeText">Dòng chữ nhỏ phía trên (để trống nếu chỉ cần 1 dòng):</label>
+            <input type="text" id="qrTopBadgeText" value="" placeholder="VD: thinhduc" oninput="renderHeartQRCard()">
+          </div>
+          <div>
+            <label for="qrMainHeaderText">Dòng chữ chính trên đầu ảnh QR:</label>
+            <input type="text" id="qrMainHeaderText" value="Gửi Chị" placeholder="VD: Gửi Chị" oninput="renderHeartQRCard()">
           </div>
         </div>
       </div>
@@ -572,6 +587,10 @@
 
   <script>
     const TEMPLATES = {
+      gui_chi: { bg: "./templates/bg_gui_chi.jpg", x: 50.5357, y: 66.2857, w: 73.0714, rot: 0 },
+      thinhduc_gui_chi: { bg: "./templates/bg_thinhduc_gui_chi.jpg", x: 50.5357, y: 66.2857, w: 73.0714, rot: 0 },
+      red_black: { bg: "./templates/bg_red_black.jpg", x: 50.0, y: 66.7857, w: 70.0, rot: 0 },
+      custom_clean: { bg: "./templates/bg_gui_chi_clean.jpg", x: 50.5357, y: 66.2857, w: 73.0714, rot: 0, customText: true },
       cb44: { bg: "./templates/bg_cb44.jpg", x: 50.6004246, y: 66.768632, w: 73.600955, rot: 0 },
       bd2c: { bg: "./templates/bg_bd2c.jpg", x: 49.5952939, y: 62.8542616, w: 70.487545, rot: 0 },
       71c7: { bg: "./templates/bg_71c7.jpg", x: 52.4614092, y: 79.5500464, w: 53.0, rot: 5 }
@@ -1200,14 +1219,58 @@ window.DANH_SACH_THIEP = ${JSON.stringify(allCardsMap, null, 2)};
       return bgCache[src];
     }
 
+    function onQrTemplateChange() {
+      const tplKey = document.getElementById("qrTemplate").value || "gui_chi";
+      const customBox = document.getElementById("customQrTextFields");
+      if (customBox) {
+        customBox.style.display = tplKey === "custom_clean" ? "grid" : "none";
+      }
+      renderHeartQRCard();
+    }
+
+    function drawCustomHeaderOnCanvas(ctx, W, topText, mainText) {
+      ctx.save();
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      if (topText) {
+        ctx.font = "900 96px 'Mali', 'Quicksand', sans-serif";
+        ctx.fillStyle = "#8a041f";
+        for (let dy = 7; dy >= 1; dy--) {
+          ctx.fillText(topText, W / 2, 92 + dy);
+        }
+        const gradTop = ctx.createLinearGradient(0, 45, 0, 135);
+        gradTop.addColorStop(0, "#ff2e69");
+        gradTop.addColorStop(1, "#c4082d");
+        ctx.fillStyle = gradTop;
+        ctx.fillText(topText, W / 2, 92);
+      }
+
+      if (mainText) {
+        const yPos = topText ? 204 : 148;
+        const fSize = topText ? 84 : 112;
+        ctx.font = `italic bold ${fSize}px Georgia, serif`;
+        ctx.fillStyle = "#730418";
+        for (let dy = 6; dy >= 1; dy--) {
+          ctx.fillText(mainText, W / 2, yPos + dy);
+        }
+        const gradMain = ctx.createLinearGradient(0, yPos - 45, 0, yPos + 45);
+        gradMain.addColorStop(0, "#f51c4e");
+        gradMain.addColorStop(1, "#a50624");
+        ctx.fillStyle = gradMain;
+        ctx.fillText(mainText, W / 2, yPos);
+      }
+      ctx.restore();
+    }
+
     async function renderHeartQRCard() {
       const link = getFullQrLinkForCurrentCard();
       const linkPreview = document.getElementById("fullQrLinkPreview");
       if (linkPreview) linkPreview.textContent = link;
 
-      const tplKey = document.getElementById("qrTemplate").value || "cb44";
+      const tplKey = document.getElementById("qrTemplate").value || "gui_chi";
       const colorHex = document.getElementById("qrColor").value || "#e72626";
-      const tpl = TEMPLATES[tplKey] || TEMPLATES.cb44;
+      const tpl = TEMPLATES[tplKey] || TEMPLATES.gui_chi;
 
       const cardCv = document.getElementById("qrCardCanvas");
       const ctx = cardCv.getContext("2d");
@@ -1225,6 +1288,12 @@ window.DANH_SACH_THIEP = ${JSON.stringify(allCardsMap, null, 2)};
         ctx.drawImage(bgImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
       } catch (e) {
         console.warn("Could not load template bg:", e);
+      }
+
+      if (tpl.customText) {
+        const topTxt = (document.getElementById("qrTopBadgeText").value || "").trim();
+        const mainTxt = (document.getElementById("qrMainHeaderText").value || "").trim();
+        drawCustomHeaderOnCanvas(ctx, W, topTxt, mainTxt);
       }
 
       const heartQR = generateHeartQRCanvas(link, colorHex, 2);
