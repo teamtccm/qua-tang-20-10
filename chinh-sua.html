@@ -514,11 +514,11 @@
         <h2>💖 Xuất Thiệp QR Trái Tim 20/10</h2>
         <p class="hint">Chỉ cần nhập tên miền GitHub Pages của bạn (ví dụ: <code>https://ten-ban.github.io/qua-20-10/</code>), hệ thống sẽ tự động gắn đuôi <code>?id=ma-thiep</code> tương ứng cho từng tấm QR!</p>
 
-        <label for="qrBaseUrl">Tên miền Web gốc của bạn (Base URL):</label>
-        <input type="text" id="qrBaseUrl" value="" placeholder="VD: https://username.github.io/qua-tang-20-10/" oninput="renderHeartQRCard()">
+        <label for="qrBaseUrl">Tên miền Web gốc của bạn (Đã điền sẵn link GitHub Pages của bạn — không cần sửa):</label>
+        <input type="text" id="qrBaseUrl" value="https://teamtccm.github.io/qua-tang-20-10/" placeholder="VD: https://teamtccm.github.io/qua-tang-20-10/" oninput="renderHeartQRCard()">
 
         <label>Link đầy đủ được mã hóa vào tấm QR hiện tại:</label>
-        <div id="fullQrLinkPreview" style="padding:10px 12px;background:#fff0f5;border:1px dashed #ff5f8f;border-radius:10px;font-family:monospace;font-size:0.86rem;color:#d91b5c;margin-bottom:12px;word-break:break-all;"></div>
+        <div id="fullQrLinkPreview" style="padding:10px 12px;background:#fff0f5;border:1px dashed #ff5f8f;border-radius:10px;font-family:monospace;font-size:0.86rem;color:#d91b5c;margin-bottom:12px;word-break:break-all;">https://teamtccm.github.io/qua-tang-20-10/</div>
 
         <div class="grid-2">
           <div>
@@ -594,7 +594,7 @@
       custom_clean: { bg: "./templates/bg_gui_chi_clean.jpg", x: 50.5357, y: 66.2857, w: 73.0714, rot: 0, customText: true },
       cb44: { bg: "./templates/bg_cb44.jpg", x: 50.6004246, y: 66.768632, w: 73.600955, rot: 0 },
       bd2c: { bg: "./templates/bg_bd2c.jpg", x: 49.5952939, y: 62.8542616, w: 70.487545, rot: 0 },
-      71c7: { bg: "./templates/bg_71c7.jpg", x: 52.4614092, y: 79.5500464, w: 53.0, rot: 5 }
+      "71c7": { bg: "./templates/bg_71c7.jpg", x: 52.4614092, y: 79.5500464, w: 53.0, rot: 5 }
     };
 
     let currentCardId = "macdinh";
