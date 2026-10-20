@@ -75,8 +75,22 @@
       color: #fff;
       border: 1.5px solid rgba(255,255,255,0.5);
     }
+    .btn-sm {
+      padding: 7px 11px;
+      font-size: 0.8rem;
+      border-radius: 9px;
+      background: #fff0f5;
+      color: var(--pink-dark);
+      border: 1px solid #ffbfd6;
+      cursor: pointer;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .btn-sm:hover {
+      background: #ffe0ec;
+    }
     .layout {
-      max-width: 1400px;
+      max-width: 1420px;
       margin: 0 auto;
       padding: 20px;
       display: grid;
@@ -227,9 +241,55 @@
       color: #fff;
       border-color: var(--pink);
     }
-    .new-feature-card {
+    .highlight-card {
       border: 2px solid #ff75a0;
       background: linear-gradient(180deg, #fff9fb 0%, #ffffff 100%);
+    }
+    /* Danh sách 6 ô ảnh bó hoa trực quan */
+    .bouquet-slots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 680px) {
+      .bouquet-slots { grid-template-columns: 1fr; }
+    }
+    .photo-slot {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff8fb;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+    }
+    .photo-slot img {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #2a1625;
+      border: 1.5px solid #ff9ec0;
+      flex-shrink: 0;
+    }
+    .photo-slot-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .photo-slot-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--pink-dark);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .photo-slot input[type="text"] {
+      margin-bottom: 0;
+      padding: 7px 10px;
+      font-size: 0.83rem;
     }
   </style>
 </head>
@@ -246,7 +306,7 @@
   </header>
 
   <div class="layout">
-    <!-- CỘT TRÁI: CÁC Ô CHỈNH SỬA THÔNG ĐIỆP -->
+    <!-- CỘT TRÁI: CÁC Ô CHỈNH SỬA THEO ĐÚNG THỨ TỰ CÁC MÀN HÌNH -->
     <div>
       <!-- MỤC 0: QUẢN LÝ NHIỀU MÃ QR TRÊN CÙNG 1 TRANG WEB -->
       <div class="card" style="border: 2px solid #ff9ec0; background: #fff9fb;">
@@ -263,8 +323,8 @@
         </div>
       </div>
 
-      <!-- TÍNH NĂNG MỚI 1: KHÓA MẬT KHẨU 4 SỐ & 2 CHÚ GẤU ÔM NHAU -->
-      <div class="card new-feature-card">
+      <!-- BƯỚC 1 (MÀN MỞ ĐẦU): KHÓA MẬT KHẨU 4 SỐ & 2 CHÚ GẤU ÔM NHAU -->
+      <div class="card highlight-card">
         <h2>🔐 Màn Mở Đầu: Khóa Mật Khẩu Kỷ Niệm 4 Số + 2 Chú Gấu Ôm Nhau</h2>
         <p class="hint">Trước khi mở bó hoa, người nhận bấm đúng 4 chữ số mật khẩu để 2 chú gấu chạy lại ôm nhau và mở khóa trái tim.</p>
 
@@ -284,7 +344,7 @@
 
         <div class="grid-2">
           <div>
-            <label for="passcodeTitle">Tiêu đề màn khóa:</label>
+            <label for="passcodeTitle">Tiêu đề màn khóa (hiện dưới 2 chú gấu):</label>
             <input type="text" id="passcodeTitle" oninput="autoSaveDraft()">
           </div>
           <div>
@@ -294,12 +354,49 @@
         </div>
       </div>
 
-      <!-- MỤC 1: LỜI CHÚC 3D BAY LƠ LỬNG -->
+      <!-- BƯỚC 2 (MÀN 1): 6 ẢNH NỞ RA TRONG BÓ HOA HỒNG -->
+      <div class="card highlight-card">
+        <h2>💐 Màn 1: Đường Dẫn 6 Ảnh Nở Ra Trong Bó Hoa Hồng</h2>
+        <p class="hint">
+          Khi người nhận chạm vào bó hoa, <b>6 bức ảnh</b> bên dưới sẽ lần lượt bung nở ra giữa các bông hoa hồng. Bạn có thể <b>dán đường dẫn (link) ảnh</b> vào từng ô hoặc bấm <b>📁 Chọn ảnh từ máy</b>:
+        </p>
+
+        <div class="bouquet-slots" id="bouquetSlotsContainer"></div>
+
+        <details style="margin-top: 8px;">
+          <summary style="cursor:pointer;font-size:0.84rem;font-weight:700;color:var(--pink-dark);">📋 Hoặc bấm vào đây để sửa nhanh toàn bộ 6 đường dẫn ảnh bằng 1 ô văn bản (mỗi dòng 1 link)</summary>
+          <div style="margin-top: 8px;">
+            <textarea id="bouquetImages" rows="6" placeholder="Mỗi dòng 1 đường dẫn ảnh..." oninput="syncSlotsFromTextarea()"></textarea>
+          </div>
+        </details>
+
+        <div style="margin-top: 12px;">
+          <label for="bgMusic">🎵 Đường dẫn Nhạc nền phát tự động khi chạm vào bó hoa:</label>
+          <input type="text" id="bgMusic" style="margin-bottom:0;" oninput="autoSaveDraft()">
+        </div>
+      </div>
+
+      <!-- BƯỚC 3 (MÀN 2): KHÔNG GIAN 3D CHỮ NEON & ẢNH KỶ NIỆM BAY -->
       <div class="card">
-        <h2>✨ 1. Các câu chúc bay trong Không Gian 3D (Màn 2)</h2>
-        <p class="hint">Mỗi dòng là một câu chúc phát sáng neon bay lơ lửng khi người nhận ấn giữ bó hoa. Bạn có thể sửa, thêm hoặc xóa tùy ý.</p>
-        <label for="flyingTexts">Danh sách câu chúc (mỗi dòng 1 câu):</label>
-        <textarea id="flyingTexts" rows="8" oninput="autoSaveDraft()"></textarea>
+        <h2>✨ Màn 2: Không Gian 3D — Các Câu Chúc & Đường Dẫn Ảnh Bay Lơ Lửng</h2>
+        <p class="hint">Khi người nhận ấn giữ bó hoa, màn hình bay vào vũ trụ 3D gồm các câu chúc neon và các tấm ảnh kỷ niệm xoay 360 độ.</p>
+
+        <div class="grid-2">
+          <div>
+            <label for="flyingTexts">💬 Danh sách câu chúc 3D (mỗi dòng 1 câu):</label>
+            <textarea id="flyingTexts" rows="9" oninput="autoSaveDraft()"></textarea>
+          </div>
+          <div>
+            <label for="flyingImages">🖼️ Đường dẫn các ảnh bay 3D (mỗi dòng 1 link ảnh):</label>
+            <textarea id="flyingImages" rows="9" oninput="autoSaveDraft()"></textarea>
+            <div style="display:flex;justify-content:flex-end;margin-top:-6px;margin-bottom:8px;">
+              <label class="btn-sm" style="margin:0;">
+                📁 Tải thêm ảnh từ máy vào danh sách bay 3D
+                <input type="file" accept="image/*" style="display:none;" onchange="uploadFlyingImage(this)">
+              </label>
+            </div>
+          </div>
+        </div>
 
         <div class="grid-2">
           <div>
@@ -320,35 +417,41 @@
         </div>
       </div>
 
-      <!-- MỤC 2: PHONG BÌ & BỨC THƯ TÌNH 20/10 -->
+      <!-- BƯỚC 4 (MÀN 3): PHONG BÌ & BỨC THƯ TÌNH 20/10 -->
       <div class="card">
-        <h2>💌 2. Nội dung Phong Bì & Lá Thư 20/10 (Màn 3)</h2>
+        <h2>💌 Màn 3: Nội dung Phong Bì & Lá Thư 20/10</h2>
         <p class="hint">Khi người nhận bấm vào biểu tượng Phong bì ở góc trên bên phải màn hình, phong bì hồng sẽ hiện ra và mở lá thư này.</p>
 
         <div class="grid-3">
           <div>
-            <label for="envTop">Dòng chữ trên phong bì:</label>
+            <label for="envTop">Dòng chữ trên nắp phong bì:</label>
             <input type="text" id="envTop" oninput="autoSaveDraft()">
           </div>
           <div>
-            <label for="envHeadline">Tiêu đề chính giữa:</label>
+            <label for="envHeadline">Tiêu đề giữa nắp phong bì:</label>
             <input type="text" id="envHeadline" oninput="autoSaveDraft()">
           </div>
           <div>
-            <label for="envBottom">Dòng chữ dưới phong bì:</label>
+            <label for="envBottom">Dòng chữ dưới nắp phong bì:</label>
             <input type="text" id="envBottom" oninput="autoSaveDraft()">
           </div>
         </div>
 
-        <label for="letterText">Nội dung bức thư (Dòng đầu bắt đầu bằng "Gửi..." sẽ được in bằng font chữ ký lớn):</label>
+        <label for="letterText">Nội dung bức thư (Dòng đầu bắt đầu bằng "Gửi..." sẽ tự động làm chữ ký tiêu đề lớn ở đầu thư):</label>
         <textarea id="letterText" rows="6" oninput="autoSaveDraft()"></textarea>
 
         <label for="letterPhoto">Đường dẫn ảnh nhỏ ở góc dưới bên phải lá thư:</label>
-        <input type="text" id="letterPhoto" oninput="autoSaveDraft()">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="text" id="letterPhoto" style="margin-bottom:0;flex:1;" oninput="autoSaveDraft()">
+          <label class="btn-sm" style="margin:0;">
+            📁 Chọn ảnh
+            <input type="file" accept="image/*" style="display:none;" onchange="uploadLetterPhoto(this)">
+          </label>
+        </div>
       </div>
 
-      <!-- TÍNH NĂNG MỚI 2: BỐC THĂM HỘP QUÀ BÍ MẬT — VOUCHER TÌNH YÊU CUỐI THƯ -->
-      <div class="card new-feature-card">
+      <!-- BƯỚC 5 (CUỐI BỨC THƯ): BỐC THĂM HỘP QUÀ BÍ MẬT — VOUCHER TÌNH YÊU -->
+      <div class="card highlight-card">
         <h2>🎁 Cuối Bức Thư: Bốc Thăm Hộp Quà Bí Mật — "Voucher Tình Yêu"</h2>
         <p class="hint">Khi người nhận mở bức thư 20/10 ra đọc, nút <b>Mở Hộp Quà Bí Mật</b> sẽ xuất hiện ở dưới bức thư để người nhận chọn 1 trong 3 hộp quà và bốc trúng Voucher bạn cài bên dưới!</p>
 
@@ -370,29 +473,9 @@
         <textarea id="voucherItems" rows="4" oninput="autoSaveDraft()"></textarea>
       </div>
 
-      <!-- MỤC 3: ẢNH BÓ HOA, ẢNH BAY 3D & NHẠC NỀN -->
+      <!-- BƯỚC 6: TẠO MÃ QR TRÁI TIM 20/10 -->
       <div class="card">
-        <h2>🌹 3. Ảnh trong Bó Hoa, Ảnh Bay 3D & Nhạc Nền</h2>
-        <p class="hint">Bạn có thể chép ảnh của mình vào thư mục <code>assets/sample/</code> hoặc dán link ảnh trực tiếp vào bên dưới (mỗi dòng 1 link ảnh).</p>
-
-        <label for="bgMusic">Nhạc nền phát tự động:</label>
-        <input type="text" id="bgMusic" oninput="autoSaveDraft()">
-
-        <div class="grid-2">
-          <div>
-            <label for="bouquetImages">6 Ảnh nở trong bó hoa (Màn 1):</label>
-            <textarea id="bouquetImages" rows="6" oninput="autoSaveDraft()"></textarea>
-          </div>
-          <div>
-            <label for="flyingImages">Ảnh kỷ niệm bay 3D (Màn 2):</label>
-            <textarea id="flyingImages" rows="6" oninput="autoSaveDraft()"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- MỤC 4: TẠO MÃ QR TRÁI TIM 20/10 -->
-      <div class="card">
-        <h2>💖 4. Cài đặt Link đích cho Thiệp QR Trái Tim 20/10</h2>
+        <h2>💖 Xuất Thiệp QR Trái Tim 20/10</h2>
         <p class="hint">Chỉ cần nhập tên miền GitHub Pages của bạn (ví dụ: <code>https://ten-ban.github.io/qua-20-10/</code>), hệ thống sẽ tự động gắn đuôi <code>?id=ma-thiep</code> tương ứng cho từng tấm QR!</p>
 
         <label for="qrBaseUrl">Tên miền Web gốc của bạn (Base URL):</label>
@@ -474,6 +557,99 @@
       return base + (base.includes("?") ? "&" : "?") + "id=" + encodeURIComponent(currentCardId);
     }
 
+    function renderBouquetSlots(urls = []) {
+      const container = document.getElementById("bouquetSlotsContainer");
+      const padded = Array.from({ length: 6 }, (_, i) => urls[i] || `./assets/sample/bouquet-${i + 1}.webp`);
+      container.innerHTML = padded.map((u, idx) => `
+        <div class="photo-slot">
+          <img id="bouquetThumb_${idx}" src="${u}" alt="Ảnh ${idx + 1}" onerror="this.src='./assets/icons/heart.svg'">
+          <div class="photo-slot-body">
+            <div class="photo-slot-title">
+              <span>🌹 Ảnh bó hoa #${idx + 1}</span>
+              <label class="btn-sm" style="padding:3px 8px;font-size:0.74rem;margin:0;">
+                📁 Chọn file
+                <input type="file" accept="image/*" style="display:none;" onchange="uploadBouquetSlotFile(${idx}, this)">
+              </label>
+            </div>
+            <input type="text" id="bouquetInput_${idx}" value="${u}" placeholder="Dán đường dẫn (link) ảnh #${idx + 1}..." oninput="onBouquetSlotInput(${idx})">
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function onBouquetSlotInput(idx) {
+      const val = document.getElementById(`bouquetInput_${idx}`).value.trim();
+      const thumb = document.getElementById(`bouquetThumb_${idx}`);
+      if (thumb && val) thumb.src = val;
+      const allUrls = [];
+      for (let i = 0; i < 6; i++) {
+        const el = document.getElementById(`bouquetInput_${i}`);
+        if (el && el.value.trim()) allUrls.push(el.value.trim());
+      }
+      document.getElementById("bouquetImages").value = allUrls.join("\n");
+      autoSaveDraft();
+    }
+
+    function syncSlotsFromTextarea() {
+      const lines = document.getElementById("bouquetImages").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+      renderBouquetSlots(lines);
+      autoSaveDraft();
+    }
+
+    async function uploadFileHelper(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          try {
+            const res = await fetch("/api/upload-image", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ filename: file.name, dataUrl: reader.result })
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.url) return resolve(data.url);
+            }
+          } catch (e) {}
+          resolve(reader.result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadBouquetSlotFile(idx, inputEl) {
+      const file = inputEl.files && inputEl.files[0];
+      if (!file) return;
+      const url = await uploadFileHelper(file);
+      const txtInput = document.getElementById(`bouquetInput_${idx}`);
+      if (txtInput) {
+        txtInput.value = url;
+        onBouquetSlotInput(idx);
+      }
+      inputEl.value = "";
+    }
+
+    async function uploadFlyingImage(inputEl) {
+      const file = inputEl.files && inputEl.files[0];
+      if (!file) return;
+      const url = await uploadFileHelper(file);
+      const ta = document.getElementById("flyingImages");
+      ta.value = (ta.value.trim() ? ta.value.trim() + "\n" : "") + url;
+      autoSaveDraft();
+      inputEl.value = "";
+    }
+
+    async function uploadLetterPhoto(inputEl) {
+      const file = inputEl.files && inputEl.files[0];
+      if (!file) return;
+      const url = await uploadFileHelper(file);
+      document.getElementById("letterPhoto").value = url;
+      autoSaveDraft();
+      inputEl.value = "";
+    }
+
     function renderCardPills() {
       const container = document.getElementById("cardPills");
       const ids = Array.from(new Set(["macdinh", ...Object.keys(allCardsMap)]));
@@ -497,6 +673,18 @@
       document.getElementById("passcodeTitle").value = passCfg.title || "Nhập mật khẩu tình yêu 💖";
       document.getElementById("passcodeHint").value = passCfg.hint || "Gợi ý: Ngày Phụ nữ Việt Nam (4 chữ số: 2010)";
 
+      const defaultBouquet = [
+        "./assets/sample/bouquet-1.webp",
+        "./assets/sample/bouquet-2.webp",
+        "./assets/sample/bouquet-3.webp",
+        "./assets/sample/bouquet-4.webp",
+        "./assets/sample/bouquet-5.webp",
+        "./assets/sample/bouquet-6.webp"
+      ];
+      const bUrls = (Array.isArray(cfg.bouquetImages) && cfg.bouquetImages.length) ? cfg.bouquetImages : defaultBouquet;
+      document.getElementById("bouquetImages").value = bUrls.join("\n");
+      renderBouquetSlots(bUrls);
+
       document.getElementById("flyingTexts").value = (cfg.flyingTexts || []).join("\n");
       document.getElementById("palette").value = cfg.palette || "hongdon";
       document.getElementById("flyingHearts").value = String(cfg.flyingHearts !== false);
@@ -519,7 +707,6 @@
       document.getElementById("voucherItems").value = (Array.isArray(vCfg.items) && vCfg.items.length ? vCfg.items : defaultVoucherItems).join("\n");
 
       document.getElementById("bgMusic").value = cfg.bgMusic || "./assets/music/tiktok-20-10.mp3";
-      document.getElementById("bouquetImages").value = (cfg.bouquetImages || []).join("\n");
       document.getElementById("flyingImages").value = (cfg.flyingImages || []).join("\n");
     }
 
