@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trạm Chỉnh Sửa Thông Điệp & Tạo QR Trái Tim 20/10 💖</title>
+  <script src="./cauhinh.js"></script>
+  <!-- Thư viện tạo ma trận QR chuẩn trên trình duyệt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+  <style>
+    :root {
+      --pink: #ff3e80;
+      --pink-dark: #d91b5c;
+      --bg: #fff5f8;
+      --card: #ffffff;
+      --border: #f8cfe0;
+      --text: #2a1625;
+      --muted: #7a6272;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: linear-gradient(135deg, #ff5f8f, #f92f72);
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(249, 47, 114, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+    header .header-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-white {
+      background: #fff;
+      color: var(--pink-dark);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+    .btn-pink {
+      background: linear-gradient(135deg, #ff5f8f, #f92f72);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(249, 47, 114, 0.28);
+    }
+    .btn-outline {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.5);
+    }
+    .layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 28px rgba(255, 79, 134, 0.06);
+    }
+    .card h2 {
+      margin: 0 0 6px 0;
+      font-size: 1.05rem;
+      color: var(--pink-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card p.hint {
+      margin: 0 0 14px 0;
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      color: var(--text);
+      background: #fffbfd;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus, textarea:focus, select:focus {
+      border-color: var(--pink);
+      background: #fff;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .sticky-col {
+      position: sticky;
+      top: 84px;
+    }
+    .phone-frame {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      max-height: 680px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 6px solid #2a1625;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+      background: #000;
+    }
+    .phone-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      font-weight: 700;
+      font-size: 0.86rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+    .qr-preview-box {
+      text-align: center;
+      background: #fff;
+      border-radius: 20px;
+      padding: 14px;
+      border: 1px solid var(--border);
+    }
+    .qr-preview-box canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #e6f9ed;
+      color: #117a37;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌸 Trạm Chỉnh Sửa Web Quà Tặng 20/10 & Tạo QR Trái Tim</h1>
+    <div class="header-actions">
+      <button class="btn btn-white" onclick="applyAndPreview()">🔄 Cập nhật Xem thử</button>
+      <button class="btn btn-white" onclick="downloadCauHinhJS()">💾 Tải file cauhinh.js</button>
+      <a class="btn btn-outline" href="./index.html" target="_blank">🚀 Mở trang Web gốc</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- CỘT TRÁI: CÁC Ô CHỈNH SỬA THÔNG ĐIỆP -->
+    <div>
+      <!-- MỤC 1: LỜI CHÚC 3D BAY LƠ LỬNG -->
+      <div class="card">
+        <h2>✨ 1. Các câu chúc bay trong Không Gian 3D (Màn 2)</h2>
+        <p class="hint">Mỗi dòng là một câu chúc phát sáng neon bay lơ lửng khi người nhận ấn giữ bó hoa. Bạn có thể sửa, thêm hoặc xóa tùy ý.</p>
+        <label for="flyingTexts">Danh sách câu chúc (mỗi dòng 1 câu):</label>
+        <textarea id="flyingTexts" rows="9" oninput="autoSaveDraft()"></textarea>
+
+        <div class="grid-2">
+          <div>
+            <label for="palette">Tông màu chữ Neon 3D:</label>
+            <select id="palette" onchange="autoSaveDraft()">
+              <option value="hongdon">💗 Hồng Neon (Chuẩn video TikTok)</option>
+              <option value="hong">🌸 Hồng - Xanh chuyển sắc</option>
+              <option value="vang">✨ Vàng Ánh Kim</option>
+            </select>
+          </div>
+          <div>
+            <label for="flyingHearts">Hiệu ứng Trái tim 3D bay cùng chữ:</label>
+            <select id="flyingHearts" onchange="autoSaveDraft()">
+              <option value="true">❤️ Bật trái tim 3D bay</option>
+              <option value="false">⚪ Tắt trái tim 3D</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- MỤC 2: PHONG BÌ & BỨC THƯ TÌNH 20/10 -->
+      <div class="card">
+        <h2>💌 2. Nội dung Phong Bì & Lá Thư 20/10 (Màn 3)</h2>
+        <p class="hint">Khi người nhận bấm vào biểu tượng Phong bì ở góc trên bên phải màn hình, phong bì hồng sẽ hiện ra và mở lá thư này.</p>
+
+        <div class="grid-3">
+          <div>
+            <label for="envTop">Dòng chữ trên phong bì:</label>
+            <input type="text" id="envTop" oninput="autoSaveDraft()">
+          </div>
+          <div>
+            <label for="envHeadline">Tiêu đề chính giữa:</label>
+            <input type="text" id="envHeadline" oninput="autoSaveDraft()">
+          </div>
+          <div>
+            <label for="envBottom">Dòng chữ dưới phong bì:</label>
+            <input type="text" id="envBottom" oninput="autoSaveDraft()">
+          </div>
+        </div>
+
+        <label for="letterText">Nội dung bức thư (Dòng đầu bắt đầu bằng "Gửi..." sẽ được in bằng font chữ ký lớn):</label>
+        <textarea id="letterText" rows="7" oninput="autoSaveDraft()"></textarea>
+
+        <label for="letterPhoto">Đường dẫn ảnh nhỏ ở góc dưới bên phải lá thư:</label>
+        <input type="text" id="letterPhoto" oninput="autoSaveDraft()">
+      </div>
+
+      <!-- MỤC 3: ẢNH BÓ HOA, ẢNH BAY 3D & NHẠC NỀN -->
+      <div class="card">
+        <h2>🌹 3. Ảnh trong Bó Hoa, Ảnh Bay 3D & Nhạc Nền</h2>
+        <p class="hint">Bạn có thể chép ảnh của mình vào thư mục <code>assets/sample/</code> hoặc dán link ảnh trực tiếp vào bên dưới (mỗi dòng 1 link ảnh).</p>
+
+        <label for="bgMusic">Nhạc nền phát tự động:</label>
+        <input type="text" id="bgMusic" oninput="autoSaveDraft()">
+
+        <div class="grid-2">
+          <div>
+            <label for="bouquetImages">6 Ảnh nở trong bó hoa (Màn 1):</label>
+            <textarea id="bouquetImages" rows="6" oninput="autoSaveDraft()"></textarea>
+          </div>
+          <div>
+            <label for="flyingImages">Ảnh kỷ niệm bay 3D (Màn 2):</label>
+            <textarea id="flyingImages" rows="6" oninput="autoSaveDraft()"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- MỤC 4: TẠO MÃ QR TRÁI TIM 20/10 -->
+      <div class="card">
+        <h2>💖 4. Cài đặt Link đích cho Thiệp QR Trái Tim 20/10</h2>
+        <p class="hint">Nhập đường link GitHub Pages / Vercel của bạn (ví dụ: <code>https://ten-ban.github.io/qua-20-10/</code>) để vẽ mã QR Trái Tim trỏ thẳng về trang web!</p>
+
+        <label for="qrBaseUrl">Đường dẫn trang Web khi quét QR:</label>
+        <input type="text" id="qrBaseUrl" value="" placeholder="VD: https://username.github.io/qua-tang-20-10/" oninput="renderHeartQRCard()">
+
+        <div class="grid-2">
+          <div>
+            <label for="qrTemplate">Chọn mẫu phôi thiệp 20/10:</label>
+            <select id="qrTemplate" onchange="renderHeartQRCard()">
+              <option value="cb44">🐰 Mẫu 1: Bó hoa hồng & Thỏ trắng (Chuẩn video TikTok)</option>
+              <option value="bd2c">🌷 Mẫu 2: Khung tim vàng hồng & Thỏ trắng</option>
+              <option value="71c7">🌸 Mẫu 3: Thiệp hoa 20/10 nghiêng nhẹ</option>
+            </select>
+          </div>
+          <div>
+            <label for="qrColor">Màu hạt QR Trái Tim:</label>
+            <select id="qrColor" onchange="renderHeartQRCard()">
+              <option value="#e72626">❤️ Đỏ Hồng Tình Yêu (#e72626)</option>
+              <option value="#d6336c">💗 Hồng Đậm (#d6336c)</option>
+              <option value="#9f1239">🍷 Đỏ Rượu Vang (#9f1239)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CỘT PHẢI: XEM THỬ 3D TRỰC TIẾP & XUẤT THIỆP QR TRÁI TIM -->
+    <div class="sticky-col">
+      <div class="tabs">
+        <button class="tab-btn active" id="tabPreviewBtn" onclick="switchTab('preview')">📱 Xem thử Web 3D</button>
+        <button class="tab-btn" id="tabQrBtn" onclick="switchTab('qr')">💖 Thiệp QR Trái Tim</button>
+      </div>
+
+      <!-- KHUNG 1: XEM THỬ WEB 3D -->
+      <div id="panelPreview">
+        <div class="phone-frame">
+          <iframe id="previewIframe" src="./index.html?preview=1"></iframe>
+        </div>
+        <div style="margin-top: 10px; display: flex; gap: 8px;">
+          <button class="btn btn-pink" style="flex:1; justify-content:center;" onclick="applyAndPreview()">🔄 Áp dụng & Chạy lại từ đầu</button>
+        </div>
+      </div>
+
+      <!-- KHUNG 2: THIỆP QR TRÁI TIM 20/10 -->
+      <div id="panelQr" style="display: none;">
+        <div class="qr-preview-box">
+          <span class="status-badge">✓ Thuật toán Tim Dệt chuẩn 100%</span>
+          <canvas id="qrCardCanvas" width="1400" height="1820"></canvas>
+          <div style="margin-top: 12px; display: flex; gap: 8px;">
+            <button class="btn btn-pink" style="flex:1; justify-content:center;" onclick="downloadQRCard()">⬇️ Tải ảnh Thiệp QR (PNG nét cao)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TEMPLATES = {
+      cb44: { bg: "./templates/bg_cb44.jpg", x: 50.6004246, y: 66.768632, w: 73.600955, rot: 0 },
+      bd2c: { bg: "./templates/bg_bd2c.jpg", x: 49.5952939, y: 62.8542616, w: 70.487545, rot: 0 },
+      71c7: { bg: "./templates/bg_71c7.jpg", x: 52.4614092, y: 79.5500464, w: 53.0, rot: 5 }
+    };
+
+    function getBaseDirUrl() {
+      const loc = window.location.href.split("?")[0].split("#")[0];
+      return loc.replace(/\/[^\/]*$/, "/");
+    }
+
+    function loadFormFromConfig() {
+      const cfg = window.CAU_HINH_QUA_TANG || {};
+      document.getElementById("flyingTexts").value = (cfg.flyingTexts || []).join("\n");
+      document.getElementById("palette").value = cfg.palette || "hongdon";
+      document.getElementById("flyingHearts").value = String(cfg.flyingHearts !== false);
+
+      const env = (cfg.letter && cfg.letter.envelope) || {};
+      document.getElementById("envTop").value = env.topLine || "Dành tặng em";
+      document.getElementById("envHeadline").value = env.headline || "20/10";
+      document.getElementById("envBottom").value = env.bottomLine || "Một chút yêu thương";
+      document.getElementById("letterText").value = (cfg.letter && cfg.letter.text) || "";
+      document.getElementById("letterPhoto").value = (cfg.letter && cfg.letter.photo) || "./assets/sample/bouquet-4.webp";
+
+      document.getElementById("bgMusic").value = cfg.bgMusic || "./assets/music/tiktok-20-10.mp3";
+      document.getElementById("bouquetImages").value = (cfg.bouquetImages || []).join("\n");
+      document.getElementById("flyingImages").value = (cfg.flyingImages || []).join("\n");
+
+      document.getElementById("qrBaseUrl").value = getBaseDirUrl();
+
+      autoSaveDraft();
+      renderHeartQRCard();
+    }
+
+    function collectConfigFromForm() {
+      const bouquetImages = document.getElementById("bouquetImages").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+      const flyingImages = document.getElementById("flyingImages").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+      const flyingTexts = document.getElementById("flyingTexts").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+
+      return {
+        enableRain: true,
+        enableLetter: true,
+        flyingHearts: document.getElementById("flyingHearts").value === "true",
+        palette: document.getElementById("palette").value,
+        flyingTexts,
+        letter: {
+          envelope: {
+            topLine: document.getElementById("envTop").value.trim(),
+            headline: document.getElementById("envHeadline").value.trim(),
+            bottomLine: document.getElementById("envBottom").value.trim()
+          },
+          text: document.getElementById("letterText").value,
+          photo: document.getElementById("letterPhoto").value.trim()
+        },
+        bouquetImages,
+        bouquetCutouts: bouquetImages.map(() => true),
+        flyingImages,
+        bgMusic: document.getElementById("bgMusic").value.trim(),
+        showWatermark: false
+      };
+    }
+
+    function autoSaveDraft() {
+      const cfg = collectConfigFromForm();
+      localStorage.setItem("CUSTOM_GIFT_CONFIG_20_10", JSON.stringify(cfg));
+    }
+
+    function applyAndPreview() {
+      autoSaveDraft();
+      const iframe = document.getElementById("previewIframe");
+      iframe.src = "./index.html?preview=1&t=" + Date.now();
+      renderHeartQRCard();
+    }
+
+    function downloadCauHinhJS() {
+      const cfg = collectConfigFromForm();
+      const content = `// ============================================================================
+// 🌸 FILE CẤU HÌNH THÔNG ĐIỆP QUÀ TẶNG 20/10 (DỄ DÀNG CHỈNH SỬA) 🌸
+// ============================================================================
+
+window.CAU_HINH_QUA_TANG = ${JSON.stringify(cfg, null, 2)};
+`;
+      const blob = new Blob([content], { type: "application/javascript;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "cauhinh.js";
+      a.click();
+    }
+
+    function switchTab(tab) {
+      document.getElementById("tabPreviewBtn").classList.toggle("active", tab === "preview");
+      document.getElementById("tabQrBtn").classList.toggle("active", tab === "qr");
+      document.getElementById("panelPreview").style.display = tab === "preview" ? "block" : "none";
+      document.getElementById("panelQr").style.display = tab === "qr" ? "block" : "none";
+      if (tab === "qr") renderHeartQRCard();
+    }
+
+    // ============================================================================
+    // THUẬT TOÁN VẼ MÃ QR TRÁI TIM ("TIM DỆT" / HEART-WOVEN QR) CHUẨN 100%
+    // ============================================================================
+    function createSeededPRNG(seedStr) {
+      let t = 2166136261 >>> 0;
+      for (let i = 0; i < seedStr.length; i++) {
+        t ^= seedStr.charCodeAt(i);
+        t = Math.imul(t, 16777619) >>> 0;
+      }
+      return function() {
+        t = (t + 0x6D2B79F5) | 0;
+        let e = Math.imul(t ^ (t >>> 15), 1 | t);
+        e = (e + Math.imul(e ^ (e >>> 7), 61 | e)) ^ e;
+        return ((e ^ (e >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function buildHeartPath2D() {
+      const p = new Path2D();
+      p.moveTo(250, 138);
+      p.bezierCurveTo(250, 93, 205, 68, 150, 68);
+      p.bezierCurveTo(83, 68, 30, 116, 30, 182);
+      p.bezierCurveTo(30, 252, 102, 324, 250, 452);
+      p.bezierCurveTo(398, 324, 470, 252, 470, 182);
+      p.bezierCurveTo(470, 116, 417, 68, 350, 68);
+      p.bezierCurveTo(295, 68, 250, 93, 250, 138);
+      p.closePath();
+      return p;
+    }
+
+    function generateHeartQRCanvas(link, colorHex = "#e72626", scale = 2) {
+      const qr = qrcode(0, "M");
+      qr.addData(link);
+      qr.make();
+      const N = qr.getModuleCount();
+
+      const cw = 500 * scale;
+      const ch = 580 * scale;
+      const cv = document.createElement("canvas");
+      cv.width = cw;
+      cv.height = ch;
+      const ctx = cv.getContext("2d");
+      ctx.scale(scale, scale);
+
+      const heartPath = buildHeartPath2D();
+      const vx = 250, vy = 289, nuaCheo = 151;
+      const k = nuaCheo * Math.SQRT2;
+      const halfK = k / 2;
+      const b = k / N;
+      const margin = 0.6 * b;
+      const rand = createSeededPRNG(link || "dlove");
+
+      ctx.save();
+      ctx.clip(heartPath);
+      ctx.translate(vx, vy);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillStyle = colorHex;
+
+      const S = Math.ceil(375 / b);
+      for (let gy = -S; gy < S; gy++) {
+        for (let gx = -S; gx < S; gx++) {
+          const t = (gy + 0.5) * b;
+          const o = (gx + 0.5) * b;
+          const r = rand();
+          if (Math.abs(t) < halfK + margin && Math.abs(o) < halfK + margin) continue;
+          if (r < 0.5) {
+            ctx.fillRect(t - b / 2, o - b / 2, b + 0.15, b + 0.15);
+          }
+        }
+      }
+
+      for (let r = 0; r < N; r++) {
+        for (let c = 0; c < N; c++) {
+          if (qr.isDark(r, c)) {
+            ctx.fillRect(-halfK + c * b, -halfK + r * b, b + 0.15, b + 0.15);
+          }
+        }
+      }
+      ctx.restore();
+
+      const imgData = ctx.getImageData(0, 0, cw, ch).data;
+      let x0 = cw, y0 = ch, x1 = -1, y1 = -1;
+      for (let y = 0; y < ch; y++) {
+        for (let x = 0; x < cw; x++) {
+          if (imgData[(y * cw + x) * 4 + 3] > 8) {
+            if (x < x0) x0 = x;
+            if (x > x1) x1 = x;
+            if (y < y0) y0 = y;
+            if (y > y1) y1 = y;
+          }
+        }
+      }
+      x0 = Math.max(0, x0 - 4);
+      y0 = Math.max(0, y0 - 4);
+      x1 = Math.min(cw - 1, x1 + 4);
+      y1 = Math.min(ch - 1, y1 + 4);
+
+      const out = document.createElement("canvas");
+      out.width = x1 - x0 + 1;
+      out.height = y1 - y0 + 1;
+      out.getContext("2d").drawImage(cv, x0, y0, out.width, out.height, 0, 0, out.width, out.height);
+      return out;
+    }
+
+    const bgCache = {};
+    function loadImage(src) {
+      if (bgCache[src]) return bgCache[src];
+      bgCache[src] = new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+      return bgCache[src];
+    }
+
+    async function renderHeartQRCard() {
+      const link = (document.getElementById("qrBaseUrl").value || "").trim() || getBaseDirUrl();
+      const tplKey = document.getElementById("qrTemplate").value || "cb44";
+      const colorHex = document.getElementById("qrColor").value || "#e72626";
+      const tpl = TEMPLATES[tplKey] || TEMPLATES.cb44;
+
+      const cardCv = document.getElementById("qrCardCanvas");
+      const ctx = cardCv.getContext("2d");
+      const W = cardCv.width;
+      const H = cardCv.height;
+
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, W, H);
+
+      try {
+        const bgImg = await loadImage(tpl.bg);
+        const s = Math.max(W / bgImg.naturalWidth, H / bgImg.naturalHeight);
+        const dw = bgImg.naturalWidth * s;
+        const dh = bgImg.naturalHeight * s;
+        ctx.drawImage(bgImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      } catch (e) {
+        console.warn("Could not load template bg:", e);
+      }
+
+      const heartQR = generateHeartQRCanvas(link, colorHex, 2);
+      const qrW = (tpl.w / 100) * W;
+      const qrH = qrW * (heartQR.height / heartQR.width);
+      const cx = (tpl.x / 100) * W;
+      const cy = (tpl.y / 100) * W;
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      if (tpl.rot) ctx.rotate((tpl.rot * Math.PI) / 180);
+      ctx.drawImage(heartQR, -qrW / 2, -qrH / 2, qrW, qrH);
+      ctx.restore();
+    }
+
+    function downloadQRCard() {
+      const cardCv = document.getElementById("qrCardCanvas");
+      cardCv.toBlob(blob => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "thiep-qr-trai-tim-20-10.png";
+        a.click();
+      }, "image/png");
+    }
+
+    window.addEventListener("DOMContentLoaded", loadFormFromConfig);
+  </script>
+</body>
+</html>

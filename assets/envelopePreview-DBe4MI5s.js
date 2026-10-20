@@ -1,0 +1,1 @@
+const d={ready:"dlove:envelope-ready",sync:"dlove:envelope-sync",edit:"dlove:envelope-edit",focus:"dlove:envelope-focus"};function l(e,{peer:s,origin:a,key:o}){var i,t;return!!s&&e.source===s&&e.origin===a&&typeof o=="string"&&o.startsWith("preview-")&&((i=e.data)==null?void 0:i.key)===o&&Object.values(d).includes((t=e.data)==null?void 0:t.type)}export{d as E,l as i};
