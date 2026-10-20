@@ -358,21 +358,42 @@
       <div class="card highlight-card">
         <h2>💐 Đường Dẫn Ảnh: 6 Ảnh Đầu Vào Bó Hoa • Các Ảnh Sau Thêm Vào Phần Câu Chúc</h2>
         <p class="hint">
-          Bạn có thể điền <b>nhiều hơn 6 đường dẫn ảnh</b> (10, 15, 20 ảnh tùy ý): hệ thống sẽ tự động lấy <b>6 ảnh đầu tiên (#1 → #6)</b> cho nở ra trong <b>Bó Hoa Hồng</b>, còn <b>tất cả những ảnh từ thứ #7 trở đi</b> sẽ tự động đưa vào bay cùng <b>Các Câu Chúc 3D</b>!
+          Bạn có thể dùng <b>ảnh đã lưu về máy tính</b> hoặc <b>dán link ảnh trên mạng</b>. Hệ thống tự động lấy <b>6 ảnh đầu tiên (#1 → #6)</b> cho vào <b>Bó Hoa Hồng</b>, còn <b>tất cả những ảnh từ thứ #7 trở đi</b> sẽ tự động thêm vào <b>Các Câu Chúc 3D</b>!
         </p>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
-          <label for="bouquetImages" style="margin:0;">📋 Dán danh sách đường dẫn ảnh (mỗi dòng 1 link — điền bao nhiêu ảnh cũng được):</label>
-          <div style="display:flex;gap:6px;">
-            <button type="button" class="btn-sm" onclick="addMoreImageSlot()">➕ Thêm ô đường dẫn ảnh</button>
-            <label class="btn-sm" style="margin:0;">
-              📁 Chọn nhiều ảnh từ máy
-              <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadMultipleImages(this)">
+        <!-- KHUNG BỎ ẢNH ĐÃ LƯU VỀ MÁY (CHỌN FILE HOẶC KÉO THẢ) -->
+        <div id="localDropZone"
+             ondragover="event.preventDefault(); this.style.borderColor='#d91b5c'; this.style.background='#ffe3ee';"
+             ondragleave="this.style.borderColor='#ff85b3'; this.style.background='#fff5f9';"
+             ondrop="handleDropLocalFiles(event)"
+             style="border:2px dashed #ff85b3;background:#fff5f9;border-radius:16px;padding:16px;text-align:center;margin-bottom:14px;transition:0.2s;">
+          <div style="font-size:0.95rem;font-weight:800;color:#d91b5c;margin-bottom:6px;">
+            📸 Có sẵn ảnh lưu trên máy tính? Bấm nút bên dưới hoặc Kéo & Thả ảnh vào đây!
+          </div>
+          <div style="font-size:0.8rem;color:#7a5a6c;margin-bottom:12px;">
+            (Ảnh sẽ tự động được chép vào thư mục <code>./assets/sample/</code> của web để khi đẩy lên GitHub không bao giờ bị mất ảnh)
+          </div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <label class="btn btn-pink" style="margin:0;cursor:pointer;">
+              📂 Chọn bộ ảnh từ máy (Thay thế ảnh mẫu)
+              <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadMultipleImages(this, true)">
             </label>
+            <label class="btn-sm" style="margin:0;cursor:pointer;padding:10px 14px;font-size:0.86rem;">
+              ➕ Chọn thêm ảnh từ máy (Nối vào cuối)
+              <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadMultipleImages(this, false)">
+            </label>
+            <button type="button" class="btn-sm" style="padding:10px 14px;font-size:0.86rem;" onclick="addMoreImageSlot()">
+              ➕ Thêm 1 ô ảnh mới
+            </button>
           </div>
         </div>
 
-        <textarea id="bouquetImages" rows="8" placeholder="Dòng 1 → 6: Vào bó hoa hồng&#10;Dòng 7 trở đi: Tự động thêm vào phần các câu chúc 3D..." oninput="syncSlotsFromTextarea()"></textarea>
+        <details style="margin-bottom:12px;">
+          <summary style="cursor:pointer;font-size:0.84rem;font-weight:700;color:var(--pink-dark);">📋 Hoặc bấm vào đây nếu bạn muốn dán danh sách đường dẫn (link) ảnh hàng loạt (mỗi dòng 1 link)</summary>
+          <div style="margin-top:8px;">
+            <textarea id="bouquetImages" rows="8" placeholder="Dòng 1 → 6: Vào bó hoa hồng&#10;Dòng 7 trở đi: Tự động thêm vào phần các câu chúc 3D..." oninput="syncSlotsFromTextarea()"></textarea>
+          </div>
+        </details>
 
         <div id="imageSplitSummary" style="padding:9px 12px;border-radius:10px;background:#fff0f6;border:1px solid #ffadd2;font-size:0.83rem;font-weight:700;color:#b8144d;margin-bottom:12px;"></div>
 
@@ -749,25 +770,42 @@
       inputEl.value = "";
     }
 
-    async function uploadMultipleImages(inputEl) {
-      const files = Array.from(inputEl.files || []);
+    async function processUploadedFileList(files, replaceAll = false) {
       if (!files.length) return;
+      setSaveBadge("⏳ Đang tải ảnh từ máy...", "rgba(245, 158, 11, 0.35)");
       const uploadedUrls = [];
       for (const file of files) {
+        if (!file.type || !file.type.startsWith("image/")) continue;
         const u = await uploadFileHelper(file);
         if (u) uploadedUrls.push(u);
       }
-      const existing = document.getElementById("bouquetImages").value
-        .split("\n").map(s => s.trim()).filter(Boolean);
+      if (!uploadedUrls.length) return;
+      const existing = replaceAll
+        ? []
+        : document.getElementById("bouquetImages").value.split("\n").map(s => s.trim()).filter(Boolean);
       const combined = [...existing, ...uploadedUrls];
       currentSlotCount = Math.max(6, combined.length);
       document.getElementById("bouquetImages").value = combined.join("\n");
-      if (combined.length > 6) {
-        document.getElementById("flyingImages").value = combined.slice(6).join("\n");
-      }
+      document.getElementById("flyingImages").value = combined.slice(6).join("\n");
       renderBouquetSlots(combined);
-      autoSaveDraft();
+      await saveDirectlyToDisk();
+    }
+
+    async function uploadMultipleImages(inputEl, replaceAll = false) {
+      const files = Array.from(inputEl.files || []);
+      await processUploadedFileList(files, replaceAll);
       inputEl.value = "";
+    }
+
+    async function handleDropLocalFiles(event) {
+      event.preventDefault();
+      const dz = document.getElementById("localDropZone");
+      if (dz) {
+        dz.style.borderColor = "#ff85b3";
+        dz.style.background = "#fff5f9";
+      }
+      const files = Array.from((event.dataTransfer && event.dataTransfer.files) || []);
+      await processUploadedFileList(files, true);
     }
 
     async function uploadFlyingImage(inputEl) {
