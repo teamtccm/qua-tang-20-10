@@ -107,6 +107,29 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                 self._send_json(500, {"ok": False, "error": str(e)})
             return
 
+        if self.path == "/api/push-github":
+            import subprocess
+            try:
+                subprocess.run(["git", "add", "-A"], cwd=ROOT_DIR, check=False)
+                subprocess.run(
+                    ["git", "commit", "-m", f"Update gift config & photos ({int(time.time())})"],
+                    cwd=ROOT_DIR,
+                    check=False
+                )
+                push_res = subprocess.run(
+                    ["git", "push", "-u", "origin", "main"],
+                    cwd=ROOT_DIR,
+                    capture_output=True,
+                    text=True
+                )
+                if push_res.returncode == 0:
+                    self._send_json(200, {"ok": True, "message": "Đã đẩy cập nhật lên GitHub thành công!"})
+                else:
+                    self._send_json(500, {"ok": False, "error": push_res.stderr or push_res.stdout})
+            except Exception as e:
+                self._send_json(500, {"ok": False, "error": str(e)})
+            return
+
         self._send_json(404, {"ok": False, "error": "Not found"})
 
     def _send_json(self, status, payload):

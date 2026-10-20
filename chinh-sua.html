@@ -300,6 +300,7 @@
     <div class="header-actions">
       <span id="saveStatus" style="font-size:0.85rem;font-weight:700;background:rgba(255,255,255,0.2);padding:8px 12px;border-radius:10px;display:inline-flex;align-items:center;">✓ Đã đồng bộ</span>
       <button class="btn btn-white" onclick="saveDirectlyToDisk()">💾 Lưu vào Web & Xem thử</button>
+      <button class="btn btn-white" style="color:#0f766e;" onclick="pushUpdatesToGitHub()">☁️ Đẩy cập nhật lên GitHub</button>
       <button class="btn btn-outline" onclick="downloadCauHinhJS()">⬇️ Tải file cauhinh.js</button>
       <a class="btn btn-outline" id="openCardLinkBtn" href="./index.html" target="_blank">🚀 Mở trang Thiệp này</a>
     </div>
@@ -601,7 +602,28 @@
 
     function getBaseDirUrl() {
       const loc = window.location.href.split("?")[0].split("#")[0];
+      if (loc.includes("localhost") || loc.includes("127.0.0.1")) {
+        return "https://teamtccm.github.io/qua-tang-20-10/";
+      }
       return loc.replace(/\/[^\/]*$/, "/");
+    }
+
+    async function pushUpdatesToGitHub() {
+      await saveDirectlyToDisk();
+      setSaveBadge("☁️ Đang đẩy lên GitHub...", "rgba(14, 165, 233, 0.45)");
+      try {
+        const res = await fetch("/api/push-github", { method: "POST" });
+        const data = await res.json();
+        if (res.ok && data.ok) {
+          setSaveBadge("✓ Đã đẩy lên GitHub thành công!", "rgba(16, 185, 129, 0.45)");
+          alert("🎉 Đã đẩy toàn bộ thay đổi và ảnh mới lên GitHub thành công!\nLink web: https://teamtccm.github.io/qua-tang-20-10/");
+        } else {
+          setSaveBadge("⚠️ Lỗi đẩy GitHub", "rgba(239, 68, 68, 0.45)");
+          alert("Không thể đẩy tự động: " + (data.error || "Vui lòng kiểm tra kết nối"));
+        }
+      } catch (e) {
+        setSaveBadge("⚠️ Chỉ đẩy được khi chạy trên máy", "rgba(239, 68, 68, 0.45)");
+      }
     }
 
     function getFullQrLinkForCurrentCard() {
