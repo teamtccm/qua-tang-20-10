@@ -354,21 +354,35 @@
         </div>
       </div>
 
-      <!-- BƯỚC 2 (MÀN 1): 6 ẢNH NỞ RA TRONG BÓ HOA HỒNG -->
+      <!-- BƯỚC 2 (MÀN 1 & MÀN 2): ĐƯỜNG DẪN ẢNH (6 ẢNH ĐẦU VÀO BÓ HOA, CÁC ẢNH SAU VÀO CÂU CHÚC) -->
       <div class="card highlight-card">
-        <h2>💐 Màn 1: Đường Dẫn 6 Ảnh Nở Ra Trong Bó Hoa Hồng</h2>
+        <h2>💐 Đường Dẫn Ảnh: 6 Ảnh Đầu Vào Bó Hoa • Các Ảnh Sau Thêm Vào Phần Câu Chúc</h2>
         <p class="hint">
-          Khi người nhận chạm vào bó hoa, <b>6 bức ảnh</b> bên dưới sẽ lần lượt bung nở ra giữa các bông hoa hồng. Bạn có thể <b>dán đường dẫn (link) ảnh</b> vào từng ô hoặc bấm <b>📁 Chọn ảnh từ máy</b>:
+          Bạn có thể điền <b>nhiều hơn 6 đường dẫn ảnh</b> (10, 15, 20 ảnh tùy ý): hệ thống sẽ tự động lấy <b>6 ảnh đầu tiên (#1 → #6)</b> cho nở ra trong <b>Bó Hoa Hồng</b>, còn <b>tất cả những ảnh từ thứ #7 trở đi</b> sẽ tự động đưa vào bay cùng <b>Các Câu Chúc 3D</b>!
         </p>
 
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+          <label for="bouquetImages" style="margin:0;">📋 Dán danh sách đường dẫn ảnh (mỗi dòng 1 link — điền bao nhiêu ảnh cũng được):</label>
+          <div style="display:flex;gap:6px;">
+            <button type="button" class="btn-sm" onclick="addMoreImageSlot()">➕ Thêm ô đường dẫn ảnh</button>
+            <label class="btn-sm" style="margin:0;">
+              📁 Chọn nhiều ảnh từ máy
+              <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadMultipleImages(this)">
+            </label>
+          </div>
+        </div>
+
+        <textarea id="bouquetImages" rows="8" placeholder="Dòng 1 → 6: Vào bó hoa hồng&#10;Dòng 7 trở đi: Tự động thêm vào phần các câu chúc 3D..." oninput="syncSlotsFromTextarea()"></textarea>
+
+        <div id="imageSplitSummary" style="padding:9px 12px;border-radius:10px;background:#fff0f6;border:1px solid #ffadd2;font-size:0.83rem;font-weight:700;color:#b8144d;margin-bottom:12px;"></div>
+
+        <div style="font-size:0.84rem;font-weight:800;color:var(--pink-dark);margin-bottom:8px;">🌹 6 Ảnh đầu tiên (#1 → #6) — Nở ra trong Bó Hoa Hồng:</div>
         <div class="bouquet-slots" id="bouquetSlotsContainer"></div>
 
-        <details style="margin-top: 8px;">
-          <summary style="cursor:pointer;font-size:0.84rem;font-weight:700;color:var(--pink-dark);">📋 Hoặc bấm vào đây để sửa nhanh toàn bộ 6 đường dẫn ảnh bằng 1 ô văn bản (mỗi dòng 1 link)</summary>
-          <div style="margin-top: 8px;">
-            <textarea id="bouquetImages" rows="6" placeholder="Mỗi dòng 1 đường dẫn ảnh..." oninput="syncSlotsFromTextarea()"></textarea>
-          </div>
-        </details>
+        <div id="extraWishSlotsWrapper" style="margin-top:12px;display:none;">
+          <div style="font-size:0.84rem;font-weight:800;color:#7c3aed;margin-bottom:8px;">✨ Các ảnh tiếp theo (#7 trở đi) — Tự động thêm vào phần Các Câu Chúc 3D:</div>
+          <div class="bouquet-slots" id="extraWishSlotsContainer"></div>
+        </div>
 
         <div style="margin-top: 12px;">
           <label for="bgMusic">🎵 Đường dẫn Nhạc nền phát tự động khi chạm vào bó hoa:</label>
@@ -378,21 +392,21 @@
 
       <!-- BƯỚC 3 (MÀN 2): KHÔNG GIAN 3D CHỮ NEON & ẢNH KỶ NIỆM BAY -->
       <div class="card">
-        <h2>✨ Màn 2: Không Gian 3D — Các Câu Chúc & Đường Dẫn Ảnh Bay Lơ Lửng</h2>
-        <p class="hint">Khi người nhận ấn giữ bó hoa, màn hình bay vào vũ trụ 3D gồm các câu chúc neon và các tấm ảnh kỷ niệm xoay 360 độ.</p>
+        <h2>✨ Màn 2: Không Gian 3D — Các Câu Chúc & Ảnh Bay Cùng Câu Chúc</h2>
+        <p class="hint">Khi người nhận ấn giữ bó hoa, màn hình bay vào vũ trụ 3D gồm các câu chúc neon và các bức ảnh từ thứ #7 trở đi mà bạn đã điền ở trên.</p>
 
         <div class="grid-2">
           <div>
-            <label for="flyingTexts">💬 Danh sách câu chúc 3D (mỗi dòng 1 câu):</label>
+            <label for="flyingTexts">💬 Danh sách các câu chúc 3D (mỗi dòng 1 câu):</label>
             <textarea id="flyingTexts" rows="9" oninput="autoSaveDraft()"></textarea>
           </div>
           <div>
-            <label for="flyingImages">🖼️ Đường dẫn các ảnh bay 3D (mỗi dòng 1 link ảnh):</label>
-            <textarea id="flyingImages" rows="9" oninput="autoSaveDraft()"></textarea>
+            <label for="flyingImages">🖼️ Các ảnh bay cùng câu chúc (tự động lấy từ ảnh #7 trở đi ở trên):</label>
+            <textarea id="flyingImages" rows="9" oninput="onFlyingImagesManualEdit()"></textarea>
             <div style="display:flex;justify-content:flex-end;margin-top:-6px;margin-bottom:8px;">
               <label class="btn-sm" style="margin:0;">
-                📁 Tải thêm ảnh từ máy vào danh sách bay 3D
-                <input type="file" accept="image/*" style="display:none;" onchange="uploadFlyingImage(this)">
+                📁 Tải thêm ảnh vào phần câu chúc
+                <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadFlyingImage(this)">
               </label>
             </div>
           </div>
@@ -557,43 +571,147 @@
       return base + (base.includes("?") ? "&" : "?") + "id=" + encodeURIComponent(currentCardId);
     }
 
+    let currentSlotCount = 6;
+
+    function updateImageSplitSummary(allUrls) {
+      const summaryEl = document.getElementById("imageSplitSummary");
+      if (!summaryEl) return;
+      const nonEmpty = allUrls.filter(Boolean);
+      const bCount = Math.min(6, nonEmpty.length);
+      const wCount = Math.max(0, nonEmpty.length - 6);
+      if (wCount > 0) {
+        summaryEl.innerHTML = `✅ Đang có <b>${nonEmpty.length} ảnh</b>: <b>${bCount} ảnh đầu (#1 → #6)</b> cho vào <b>Bó Hoa Hồng</b> • <b>${wCount} ảnh sau (#7 → #${nonEmpty.length})</b> đã tự động thêm vào <b>phần Các Câu Chúc 3D</b>!`;
+      } else {
+        summaryEl.innerHTML = `💐 Đang có <b>${bCount}/6 ảnh</b> cho <b>Bó Hoa Hồng</b>. Nếu bạn điền từ <b>dòng thứ 7 trở đi</b> (hoặc bấm <b>➕ Thêm ô đường dẫn ảnh</b>), các ảnh dư ra sẽ tự động thêm vào <b>phần Các Câu Chúc 3D</b>!`;
+      }
+    }
+
     function renderBouquetSlots(urls = []) {
       const container = document.getElementById("bouquetSlotsContainer");
-      const padded = Array.from({ length: 6 }, (_, i) => urls[i] || `./assets/sample/bouquet-${i + 1}.webp`);
-      container.innerHTML = padded.map((u, idx) => `
+      const extraWrapper = document.getElementById("extraWishSlotsWrapper");
+      const extraContainer = document.getElementById("extraWishSlotsContainer");
+      const totalSlots = Math.max(6, urls.length, currentSlotCount);
+      currentSlotCount = totalSlots;
+
+      const firstSix = Array.from({ length: 6 }, (_, i) => urls[i] !== undefined ? urls[i] : `./assets/sample/bouquet-${i + 1}.webp`);
+      container.innerHTML = firstSix.map((u, idx) => `
         <div class="photo-slot">
-          <img id="bouquetThumb_${idx}" src="${u}" alt="Ảnh ${idx + 1}" onerror="this.src='./assets/icons/heart.svg'">
+          <img id="bouquetThumb_${idx}" src="${u || './assets/icons/heart.svg'}" alt="Ảnh ${idx + 1}" onerror="this.src='./assets/icons/heart.svg'">
           <div class="photo-slot-body">
             <div class="photo-slot-title">
-              <span>🌹 Ảnh bó hoa #${idx + 1}</span>
+              <span>🌹 Ảnh Bó Hoa #${idx + 1}</span>
               <label class="btn-sm" style="padding:3px 8px;font-size:0.74rem;margin:0;">
                 📁 Chọn file
                 <input type="file" accept="image/*" style="display:none;" onchange="uploadBouquetSlotFile(${idx}, this)">
               </label>
             </div>
-            <input type="text" id="bouquetInput_${idx}" value="${u}" placeholder="Dán đường dẫn (link) ảnh #${idx + 1}..." oninput="onBouquetSlotInput(${idx})">
+            <input type="text" id="bouquetInput_${idx}" value="${u}" placeholder="Dán đường dẫn (link) ảnh bó hoa #${idx + 1}..." oninput="onBouquetSlotInput(${idx})">
           </div>
         </div>
       `).join("");
+
+      if (totalSlots > 6) {
+        extraWrapper.style.display = "block";
+        const extraUrls = Array.from({ length: totalSlots - 6 }, (_, j) => urls[j + 6] || "");
+        extraContainer.innerHTML = extraUrls.map((u, j) => {
+          const idx = j + 6;
+          return `
+            <div class="photo-slot" style="border-color:#d8b4fe;background:#faf5ff;">
+              <img id="bouquetThumb_${idx}" src="${u || './assets/icons/heart.svg'}" alt="Ảnh ${idx + 1}" style="border-color:#c084fc;" onerror="this.src='./assets/icons/heart.svg'">
+              <div class="photo-slot-body">
+                <div class="photo-slot-title" style="color:#6d28d9;">
+                  <span>✨ Ảnh Câu Chúc #${idx + 1}</span>
+                  <div style="display:flex;gap:4px;">
+                    <label class="btn-sm" style="padding:3px 8px;font-size:0.74rem;margin:0;color:#6d28d9;border-color:#d8b4fe;background:#f3e8ff;">
+                      📁 Chọn file
+                      <input type="file" accept="image/*" style="display:none;" onchange="uploadBouquetSlotFile(${idx}, this)">
+                    </label>
+                    <button type="button" class="btn-sm" style="padding:3px 7px;font-size:0.74rem;margin:0;color:#be123c;" onclick="removeExtraSlot(${idx})" title="Xóa ô ảnh này">✕</button>
+                  </div>
+                </div>
+                <input type="text" id="bouquetInput_${idx}" value="${u}" placeholder="Dán đường dẫn (link) ảnh câu chúc #${idx + 1}..." oninput="onBouquetSlotInput(${idx})">
+              </div>
+            </div>
+          `;
+        }).join("");
+      } else {
+        extraWrapper.style.display = "none";
+        extraContainer.innerHTML = "";
+      }
+
+      updateImageSplitSummary(urls);
+    }
+
+    function getAllSlotValues() {
+      const allUrls = [];
+      for (let i = 0; i < currentSlotCount; i++) {
+        const el = document.getElementById(`bouquetInput_${i}`);
+        if (el && el.value.trim()) allUrls.push(el.value.trim());
+      }
+      return allUrls;
     }
 
     function onBouquetSlotInput(idx) {
       const val = document.getElementById(`bouquetInput_${idx}`).value.trim();
       const thumb = document.getElementById(`bouquetThumb_${idx}`);
-      if (thumb && val) thumb.src = val;
-      const allUrls = [];
-      for (let i = 0; i < 6; i++) {
-        const el = document.getElementById(`bouquetInput_${i}`);
-        if (el && el.value.trim()) allUrls.push(el.value.trim());
-      }
+      if (thumb) thumb.src = val || "./assets/icons/heart.svg";
+      const allUrls = getAllSlotValues();
       document.getElementById("bouquetImages").value = allUrls.join("\n");
+      if (allUrls.length > 6) {
+        document.getElementById("flyingImages").value = allUrls.slice(6).join("\n");
+      }
+      updateImageSplitSummary(allUrls);
+      autoSaveDraft();
+    }
+
+    function addMoreImageSlot() {
+      const lines = document.getElementById("bouquetImages").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+      currentSlotCount = Math.max(currentSlotCount, lines.length) + 1;
+      renderBouquetSlots(lines);
+      const newInput = document.getElementById(`bouquetInput_${currentSlotCount - 1}`);
+      if (newInput) newInput.focus();
+    }
+
+    function removeExtraSlot(idx) {
+      const allUrls = [];
+      for (let i = 0; i < currentSlotCount; i++) {
+        if (i === idx) continue;
+        const el = document.getElementById(`bouquetInput_${i}`);
+        if (el) allUrls.push(el.value.trim());
+      }
+      const cleaned = allUrls.filter(Boolean);
+      currentSlotCount = Math.max(6, cleaned.length);
+      document.getElementById("bouquetImages").value = cleaned.join("\n");
+      document.getElementById("flyingImages").value = cleaned.slice(6).join("\n");
+      renderBouquetSlots(cleaned);
       autoSaveDraft();
     }
 
     function syncSlotsFromTextarea() {
       const lines = document.getElementById("bouquetImages").value
         .split("\n").map(s => s.trim()).filter(Boolean);
+      currentSlotCount = Math.max(6, lines.length);
       renderBouquetSlots(lines);
+      if (lines.length > 6) {
+        document.getElementById("flyingImages").value = lines.slice(6).join("\n");
+      }
+      autoSaveDraft();
+    }
+
+    function onFlyingImagesManualEdit() {
+      const fLines = document.getElementById("flyingImages").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+      const currentAll = document.getElementById("bouquetImages").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+      const first6 = currentAll.slice(0, 6);
+      while (first6.length < 6) {
+        first6.push(`./assets/sample/bouquet-${first6.length + 1}.webp`);
+      }
+      const combined = [...first6, ...fLines];
+      currentSlotCount = Math.max(6, combined.length);
+      document.getElementById("bouquetImages").value = combined.join("\n");
+      renderBouquetSlots(combined);
       autoSaveDraft();
     }
 
@@ -631,13 +749,39 @@
       inputEl.value = "";
     }
 
-    async function uploadFlyingImage(inputEl) {
-      const file = inputEl.files && inputEl.files[0];
-      if (!file) return;
-      const url = await uploadFileHelper(file);
-      const ta = document.getElementById("flyingImages");
-      ta.value = (ta.value.trim() ? ta.value.trim() + "\n" : "") + url;
+    async function uploadMultipleImages(inputEl) {
+      const files = Array.from(inputEl.files || []);
+      if (!files.length) return;
+      const uploadedUrls = [];
+      for (const file of files) {
+        const u = await uploadFileHelper(file);
+        if (u) uploadedUrls.push(u);
+      }
+      const existing = document.getElementById("bouquetImages").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
+      const combined = [...existing, ...uploadedUrls];
+      currentSlotCount = Math.max(6, combined.length);
+      document.getElementById("bouquetImages").value = combined.join("\n");
+      if (combined.length > 6) {
+        document.getElementById("flyingImages").value = combined.slice(6).join("\n");
+      }
+      renderBouquetSlots(combined);
       autoSaveDraft();
+      inputEl.value = "";
+    }
+
+    async function uploadFlyingImage(inputEl) {
+      const files = Array.from(inputEl.files || []);
+      if (!files.length) return;
+      const uploadedUrls = [];
+      for (const file of files) {
+        const u = await uploadFileHelper(file);
+        if (u) uploadedUrls.push(u);
+      }
+      const ta = document.getElementById("flyingImages");
+      const current = ta.value.split("\n").map(s => s.trim()).filter(Boolean);
+      ta.value = [...current, ...uploadedUrls].join("\n");
+      onFlyingImagesManualEdit();
       inputEl.value = "";
     }
 
@@ -681,9 +825,18 @@
         "./assets/sample/bouquet-5.webp",
         "./assets/sample/bouquet-6.webp"
       ];
-      const bUrls = (Array.isArray(cfg.bouquetImages) && cfg.bouquetImages.length) ? cfg.bouquetImages : defaultBouquet;
-      document.getElementById("bouquetImages").value = bUrls.join("\n");
-      renderBouquetSlots(bUrls);
+      const rawB = (Array.isArray(cfg.bouquetImages) && cfg.bouquetImages.length) ? cfg.bouquetImages : defaultBouquet;
+      const rawF = Array.isArray(cfg.flyingImages) ? cfg.flyingImages : [];
+      // Gộp 6 ảnh đầu (Bó hoa) + các ảnh tiếp theo (Câu chúc 3D) vào chung danh sách đường dẫn ảnh
+      const first6 = rawB.slice(0, 6);
+      const extraFromB = rawB.slice(6);
+      const wishImgs = extraFromB.length > 0 ? extraFromB : rawF;
+      const combinedAllImages = [...first6, ...wishImgs];
+
+      currentSlotCount = Math.max(6, combinedAllImages.length);
+      document.getElementById("bouquetImages").value = combinedAllImages.join("\n");
+      document.getElementById("flyingImages").value = wishImgs.join("\n");
+      renderBouquetSlots(combinedAllImages);
 
       document.getElementById("flyingTexts").value = (cfg.flyingTexts || []).join("\n");
       document.getElementById("palette").value = cfg.palette || "hongdon";
@@ -707,7 +860,6 @@
       document.getElementById("voucherItems").value = (Array.isArray(vCfg.items) && vCfg.items.length ? vCfg.items : defaultVoucherItems).join("\n");
 
       document.getElementById("bgMusic").value = cfg.bgMusic || "./assets/music/tiktok-20-10.mp3";
-      document.getElementById("flyingImages").value = (cfg.flyingImages || []).join("\n");
     }
 
     function selectCard(cid) {
@@ -763,16 +915,26 @@
     }
 
     function collectConfigFromForm() {
-      const bouquetImages = document.getElementById("bouquetImages").value
+      const allEnteredImages = document.getElementById("bouquetImages").value
         .split("\n").map(s => s.trim()).filter(Boolean);
-      const flyingImages = document.getElementById("flyingImages").value
+      const manualFlyingImages = document.getElementById("flyingImages").value
         .split("\n").map(s => s.trim()).filter(Boolean);
+
+      // 6 ảnh đầu tiên (#1 -> #6) cho vào Bó Hoa
+      const bouquetImages = allEnteredImages.slice(0, 6);
+      // Các ảnh từ thứ #7 trở đi cho vào phần Các Câu Chúc 3D
+      const extraImagesFromMainBox = allEnteredImages.slice(6);
+      const flyingImages = extraImagesFromMainBox.length > 0
+        ? extraImagesFromMainBox
+        : (manualFlyingImages.length > 0 ? manualFlyingImages : bouquetImages);
+
       const flyingTexts = document.getElementById("flyingTexts").value
         .split("\n").map(s => s.trim()).filter(Boolean);
       const voucherItems = document.getElementById("voucherItems").value
         .split("\n").map(s => s.trim()).filter(Boolean);
 
       return {
+        productType: "photobouquet",
         passcode: {
           enabled: document.getElementById("passcodeEnabled").value === "true",
           pin: document.getElementById("passcodePin").value.trim() || "2010",

@@ -32,14 +32,35 @@ function fixRelPath(p) {
 }
 
 function normalizeConfigPaths(cfg) {
-  if (!cfg || typeof cfg !== "object") return {};
-  const out = { ...cfg };
-  if (Array.isArray(out.bouquetImages)) {
-    out.bouquetImages = out.bouquetImages.map(fixRelPath);
+  if (!cfg || typeof cfg !== "object") return { productType: "photobouquet" };
+  const out = { ...cfg, productType: "photobouquet" };
+  let rawBouquet = Array.isArray(out.bouquetImages)
+    ? out.bouquetImages.map(fixRelPath).filter(Boolean)
+    : [];
+  let rawFlying = Array.isArray(out.flyingImages)
+    ? out.flyingImages.map(fixRelPath).filter(Boolean)
+    : [];
+
+  // Nếu điền nhiều hơn 6 ảnh ở phần đường dẫn ảnh:
+  // 6 ảnh đầu cho vào bó hoa, các ảnh từ thứ 7 trở đi cho vào phần các câu chúc 3D
+  if (rawBouquet.length > 6) {
+    const extraForWishes = rawBouquet.slice(6);
+    rawBouquet = rawBouquet.slice(0, 6);
+    const merged = [...extraForWishes];
+    for (const img of rawFlying) {
+      if (!merged.includes(img)) merged.push(img);
+    }
+    rawFlying = merged;
   }
-  if (Array.isArray(out.flyingImages)) {
-    out.flyingImages = out.flyingImages.map(fixRelPath);
-  }
+
+  out.bouquetImages = rawBouquet;
+  out.bouquetCutouts = rawBouquet.map((_, idx) =>
+    Array.isArray(out.bouquetCutouts) && typeof out.bouquetCutouts[idx] === "boolean"
+      ? out.bouquetCutouts[idx]
+      : true
+  );
+  out.flyingImages = rawFlying;
+
   if (typeof out.bgMusic === "string") {
     out.bgMusic = fixRelPath(out.bgMusic);
   }
