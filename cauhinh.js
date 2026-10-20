@@ -5,6 +5,15 @@
 // ============================================================================
 
 window.CAU_HINH_QUA_TANG = {
+  // 0. MÀN MỞ ĐẦU: KHÓA MẬT KHẨU 4 SỐ & 2 CHÚ GẤU CHẠY LẠI ÔM NHAU
+  passcode: {
+    enabled: true,
+    pin: "2010",
+    title: "Nhập mật khẩu tình yêu 💖",
+    subtitle: "Nhập đúng 4 chữ số đặc biệt để 2 chú gấu gặp nhau và mở bó hoa nhé!",
+    hint: "Gợi ý: Ngày Phụ nữ Việt Nam (4 chữ số: 2010)"
+  },
+
   // 1. Bật/tắt các màn hiệu ứng
   enableRain: true,       // Màn 2: Không gian 3D chữ & ảnh bay
   enableLetter: true,     // Màn 3: Phong bì & bức thư tình 20/10
@@ -12,7 +21,6 @@ window.CAU_HINH_QUA_TANG = {
   palette: "hongdon",     // Màu chữ 3D: "hongdon" (Hồng), "hong" (Hồng xanh chuyển sắc), "vang" (Vàng ấm)
 
   // 2. CÁC CÂU CHÚC BAY TRONG KHÔNG GIAN 3D (Màn 2)
-  // Thêm, bớt hoặc sửa bất kỳ câu nào bạn muốn:
   flyingTexts: [
     "Chúc em luôn vui vẻ và hạnh phúc",
     "Chúc em luôn xinh đẹp",
@@ -27,29 +35,34 @@ window.CAU_HINH_QUA_TANG = {
 
   // 3. NỘI DUNG PHONG BÌ & BỨC THƯ TÌNH (Màn 3 - Khi bấm vào icon Phong Bì góc phải)
   letter: {
-    // 3 dòng chữ in bên ngoài nắp phong bì hồng:
     envelope: {
       topLine: "Dành tặng em",
       headline: "20/10",
       bottomLine: "Một chút yêu thương"
     },
-
-    // Nội dung bức thư bên trong:
-    // Lưu ý: Dòng đầu tiên bắt đầu bằng "Gửi...", "Thân gửi...", "Dear..." sẽ tự động
-    // được làm tiêu đề chữ ký nghệ thuật lớn ở đầu trang thư.
     text: `Gửi cô gái bé nhỏ của anh 🤍
 
 Anh chúc em ngày 20/10 lúc nào cũng xinh đẹp, may mắn, nhiều sức khỏe và lúc nào cũng vui vẻ. Anh mong rằng em sẽ đồng hành cùng anh trên chặng đường phía trước.
 
 Cảm ơn em vì tất cả. 🫶
 Anh yêu em bé của anh.`,
-
-    // Ảnh nhỏ đính kèm ở góc dưới bên phải tờ thư:
     photo: "./assets/sample/bouquet-4.webp"
   },
 
-  // 4. ẢNH NỞ RA TRONG BÓ HOA (Màn 1 - Tối đa 6 ảnh)
-  // Bạn có thể thay ảnh trong thư mục ./assets/sample/ hoặc dán link ảnh bất kỳ
+  // 4. HỘP QUÀ BÍ MẬT CUỐI BỨC THƯ — BỐC THĂM "VOUCHER TÌNH YÊU"
+  vouchers: {
+    enabled: true,
+    buttonText: "🎁 Mở Hộp Quà Bí Mật 20/10",
+    modalTitle: "🎁 Bốc Thăm Hộp Quà Bí Mật 20/10",
+    modalSubtitle: "Chạm vào 1 trong 3 hộp quà bên dưới để nhận phần thưởng đặc quyền từ anh nhé!",
+    items: [
+      "🎟️ Voucher Ăn Tối Lãng Mạn: 1 buổi đi ăn đồ nướng / lẩu bất kỳ do em chọn, anh bao trọn gói 100%!",
+      "🧋 Thẻ Quyền Lực Trà Sữa & Đồ Ngọt: Miễn phí trà sữa full topping + bánh ngọt suốt cả tuần lễ 20/10!",
+      "👗 Phiếu Mua Sắm Công Chúa: Chốt đơn ngay 1 món đồ bất kỳ trong giỏ hàng Shopee / TikTok Shop của em!"
+    ]
+  },
+
+  // 5. ẢNH NỞ RA TRONG BÓ HOA (Màn 1 - Tối đa 6 ảnh)
   bouquetImages: [
     "./assets/sample/bouquet-1.webp",
     "./assets/sample/bouquet-2.webp",
@@ -58,10 +71,9 @@ Anh yêu em bé của anh.`,
     "./assets/sample/bouquet-5.webp",
     "./assets/sample/bouquet-6.webp"
   ],
-  // true = ảnh đã tách nền (hiển thị nổi khối trong bó hoa), false = hiển thị khung thẻ ảnh
   bouquetCutouts: [true, true, true, true, true, true],
 
-  // 5. ẢNH KỶ NIỆM BAY TRONG KHÔNG GIAN 3D (Màn 2 - Tối đa 10 ảnh)
+  // 6. ẢNH KỶ NIỆM BAY TRONG KHÔNG GIAN 3D (Màn 2 - Tối đa 10 ảnh)
   flyingImages: [
     "./assets/sample/flying-1.webp",
     "./assets/sample/flying-2.webp",
@@ -75,9 +87,7 @@ Anh yêu em bé của anh.`,
     "./assets/sample/flying-10.webp"
   ],
 
-  // 6. NHẠC NỀN PHÁT TỰ ĐỘNG KHI MỞ HOA
-  // Có sẵn: "./assets/music/tiktok-20-10.mp3" (nhạc gốc trong video TikTok)
-  // hoặc "./assets/music/bongtrang.mp3"
+  // 7. NHẠC NỀN PHÁT TỰ ĐỘNG KHI MỞ HOA
   bgMusic: "./assets/music/tiktok-20-10.mp3",
 
   showWatermark: false

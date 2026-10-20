@@ -62,14 +62,29 @@ function decodeBase64UTF8(b64) {
   }
 }
 
+function extractCardId(loc = location) {
+  const params = new URLSearchParams(loc.search);
+  if (params.get("id")) return params.get("id").trim();
+  // Hỗ trợ dạng ngắn giống gốc: index.html?ma-thiep
+  const rawSearch = (loc.search || "").replace(/^\?+/, "").trim();
+  if (rawSearch) {
+    const firstPart = rawSearch.split("&")[0].trim();
+    if (firstPart && !firstPart.includes("=")) {
+      return decodeURIComponent(firstPart);
+    }
+  }
+  return "";
+}
+
 function parseLocation(loc = location) {
   const params = new URLSearchParams(loc.search);
+  const cardId = extractCardId(loc);
   return {
     preview: params.get("preview") === "1",
     embed: params.get("embed") === "1",
     scene: params.get("scene") || "",
     slug: "",
-    websiteId: "local-gift-20-10",
+    websiteId: cardId || "macdinh",
     studio: ""
   };
 }
@@ -78,6 +93,7 @@ async function M() {
   const diaChi = parseLocation();
   const params = new URLSearchParams(location.search);
   const baseConfig = (typeof window !== "undefined" && window.CAU_HINH_QUA_TANG) ? window.CAU_HINH_QUA_TANG : {};
+  const allCards = (typeof window !== "undefined" && window.DANH_SACH_THIEP) ? window.DANH_SACH_THIEP : {};
 
   // 1. Nếu đang xem thử trực tiếp từ trang chỉnh sửa (./chinh-sua.html)
   if (diaChi.preview) {
@@ -90,7 +106,32 @@ async function M() {
     } catch {}
   }
 
-  // 2. Nếu trong URL có tham số ?data= (chứa thông điệp tuỳ chỉnh gắn trực tiếp trong mã QR)
+  // 2. Nếu có mã thiệp cụ thể trên link (VD: ?id=nguoi-1 hoặc ?nguoi-1)
+  const cardId = extractCardId();
+  if (cardId) {
+    // 2a. Tìm trong window.DANH_SACH_THIEP (cauhinh.js)
+    if (allCards && allCards[cardId]) {
+      return {
+        trangThai: "ok",
+        config: normalizeConfigPaths({ ...baseConfig, ...allCards[cardId] }),
+        diaChi
+      };
+    }
+    // 2b. Hoặc tải từ file ./thiep/<cardId>.json
+    try {
+      const res = await fetch(`./thiep/${encodeURIComponent(cardId)}.json?t=${Date.now()}`);
+      if (res.ok) {
+        const cardData = await res.json();
+        return {
+          trangThai: "ok",
+          config: normalizeConfigPaths({ ...baseConfig, ...cardData }),
+          diaChi
+        };
+      }
+    } catch {}
+  }
+
+  // 3. Nếu trong URL có tham số ?data= (nhúng trực tiếp dữ liệu trong link)
   const encoded = params.get("data");
   if (encoded) {
     const decoded = decodeBase64UTF8(encoded);
@@ -111,7 +152,7 @@ async function M() {
     }
   }
 
-  // 3. Mặc định: Đọc trực tiếp từ file ./cauhinh.js
+  // 4. Mặc định: Đọc thiệp mặc định trong ./cauhinh.js
   return {
     trangThai: "ok",
     config: normalizeConfigPaths(baseConfig),

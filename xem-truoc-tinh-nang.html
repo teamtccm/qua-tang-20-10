@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔥 Bản Xem Trước 8 Tính Năng Hot Trend TikTok Cho Web Quà Tặng QR</title>
+  <style>
+    :root {
+      --pink: #ff3e80;
+      --pink-dark: #d91b5c;
+      --bg: #120914;
+      --card: #1e1122;
+      --border: rgba(255, 95, 143, 0.28);
+      --text: #fff5f8;
+      --muted: #c9adc0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top, #28112b 0%, #0f0711 100%);
+      color: var(--text);
+      padding-bottom: 60px;
+    }
+    header {
+      background: rgba(30, 17, 34, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      background: linear-gradient(90deg, #ff7eb3, #ff3e80, #ffd166);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+    .header-sub {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-pink {
+      background: linear-gradient(135deg, #ff5f8f, #f92f72);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(249, 47, 114, 0.35);
+    }
+    .btn-outline {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+    .grid {
+      max-width: 1380px;
+      margin: 28px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.4);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      border-color: #ff5f8f;
+      transform: translateY(-3px);
+    }
+    .card-head {
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .trend-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(255, 62, 128, 0.2);
+      color: #ff85b3;
+      border: 1px solid rgba(255, 62, 128, 0.4);
+    }
+    .card-head h2 {
+      margin: 0 0 6px 0;
+      font-size: 1.05rem;
+      color: #fff;
+    }
+    .card-head p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .demo-stage {
+      height: 360px;
+      background: #0b050d;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      user-select: none;
+    }
+
+    /* 1. PASSCODE & BEARS */
+    .bears-track {
+      width: 100%;
+      height: 74px;
+      position: relative;
+      margin-bottom: 8px;
+      background: rgba(255, 192, 203, 0.08);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bear {
+      position: absolute;
+      font-size: 2.3rem;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .pin-dots {
+      display: flex;
+      gap: 10px;
+      margin: 8px 0 12px;
+    }
+    .pin-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2px solid #ff5f8f;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .pin-dot.filled {
+      background: #ff5f8f;
+      transform: scale(1.2);
+      box-shadow: 0 0 10px #ff5f8f;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 52px);
+      gap: 8px;
+    }
+    .key-btn {
+      width: 52px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 95, 143, 0.35);
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .key-btn:active {
+      background: #ff3e80;
+      transform: scale(0.94);
+    }
+
+    /* 2. FINGERPRINT SCANNER */
+    .fp-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 62, 128, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(255, 62, 128, 0.25);
+      transition: transform 0.2s;
+    }
+    .fp-circle:active { transform: scale(0.95); }
+    .fp-scan-line {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: #00f5d4;
+      box-shadow: 0 0 12px #00f5d4;
+      top: 15%;
+      opacity: 0;
+    }
+    .fp-scanning .fp-scan-line {
+      opacity: 1;
+      animation: scanUpDown 1.2s infinite ease-in-out;
+    }
+    @keyframes scanUpDown {
+      0%, 100% { top: 18%; }
+      50% { top: 82%; }
+    }
+
+    /* 3. FAKE MESSENGER */
+    .chat-box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: #140b18;
+      border-radius: 16px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .msg-bubble {
+      max-width: 82%;
+      padding: 8px 12px;
+      border-radius: 16px;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      animation: popIn 0.25s ease-out;
+    }
+    .msg-left {
+      align-self: flex-start;
+      background: #2b1932;
+      color: #fff;
+      border-bottom-left-radius: 4px;
+    }
+    .msg-right {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #ff5f8f, #f92f72);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8) translateY(8px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* 4. LOVE DAYS COUNTER */
+    .couple-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .avatar-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 3px solid #ff5f8f;
+      object-fit: cover;
+      box-shadow: 0 0 18px rgba(255, 95, 143, 0.4);
+    }
+    .beating-heart {
+      font-size: 2.2rem;
+      animation: beat 0.9s infinite alternate;
+    }
+    @keyframes beat {
+      from { transform: scale(0.92); }
+      to { transform: scale(1.22); filter: drop-shadow(0 0 12px #ff3e80); }
+    }
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+    .counter-box {
+      background: rgba(255, 95, 143, 0.12);
+      border: 1px solid rgba(255, 95, 143, 0.3);
+      border-radius: 14px;
+      padding: 10px 4px;
+      text-align: center;
+    }
+    .counter-num {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ff7eb3;
+    }
+    .counter-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* 5. 3D PHOTO CAROUSEL RING */
+    .ring-scene {
+      width: 220px;
+      height: 150px;
+      perspective: 800px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ring-carousel {
+      width: 90px;
+      height: 120px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spinRing 12s infinite linear;
+    }
+    .ring-carousel:hover {
+      animation-play-state: paused;
+    }
+    .ring-item {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #ff7eb3;
+      box-shadow: 0 0 15px rgba(255, 62, 128, 0.45);
+    }
+    .ring-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @keyframes spinRing {
+      from { transform: rotateX(-8deg) rotateY(0deg); }
+      to { transform: rotateX(-8deg) rotateY(360deg); }
+    }
+
+    /* 6. 3D FLIPBOOK */
+    .book-wrap {
+      width: 220px;
+      height: 250px;
+      perspective: 900px;
+      position: relative;
+      cursor: pointer;
+    }
+    .book-page {
+      position: absolute;
+      inset: 0;
+      background: #fff8fa;
+      color: #2a1625;
+      border-radius: 6px 16px 16px 6px;
+      border-left: 6px solid #d91b5c;
+      padding: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+      transform-origin: left center;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .book-page.flipped {
+      transform: rotateY(-165deg);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .book-page img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 2px solid #ff9ec0;
+    }
+
+    /* 8. SECRET VOUCHER GACHA */
+    .voucher-boxes {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .gacha-box {
+      width: 78px;
+      height: 78px;
+      border-radius: 18px;
+      background: rgba(255, 95, 143, 0.14);
+      border: 2px dashed #ff5f8f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.3rem;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .gacha-box:hover {
+      transform: translateY(-5px) scale(1.06);
+      background: rgba(255, 95, 143, 0.28);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>✨ Xem Trước 8 Tính Năng Hot Trend TikTok Cho Web Quà Tặng QR</h1>
+      <div class="header-sub">Bạn hãy bấm tương tác thử trực tiếp trên từng ô bên dưới, thích tính năng nào nhắn mình ghép thẳng vào Web của bạn!</div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <a class="btn btn-outline" href="./chinh-sua.html">⬅️ Quay lại Trạm Chỉnh Sửa</a>
+      <a class="btn btn-pink" href="./index.html" target="_blank">🚀 Mở Web 20/10 Hiện Tại</a>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- TÍNH NĂNG 1: MẬT KHẨU 4 SỐ & 2 CHÚ GẤU -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">🔥 Top 1 Trend TikTok</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Màn mở đầu</span>
+        </div>
+        <h2>1. Khóa Mật Khẩu Kỷ Niệm + 2 Chú Gấu Ôm Nhau</h2>
+        <p>Nhập đúng 4 số (thử bấm <b>2 - 0 - 1 - 0</b>): mỗi lần bấm số, 2 chú gấu lại chạy gần nhau hơn và ôm chặt khi mở khóa!</p>
+      </div>
+      <div class="demo-stage">
+        <div class="bears-track">
+          <span class="bear" id="bearL" style="left: 10%;">🐻‍❄️</span>
+          <span id="bearHeart" style="font-size:1.5rem;opacity:0;transition:0.3s;">💖</span>
+          <span class="bear" id="bearR" style="right: 10%;">🐻</span>
+        </div>
+        <div id="pinStatus" style="font-size:0.82rem;color:#ff9ec0;font-weight:700;">Nhập mật khẩu tình yêu: 2010</div>
+        <div class="pin-dots" id="pinDots">
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="keypad">
+          <button class="key-btn" onclick="pressPin('1')">1</button>
+          <button class="key-btn" onclick="pressPin('2')">2</button>
+          <button class="key-btn" onclick="pressPin('3')">3</button>
+          <button class="key-btn" onclick="pressPin('4')">4</button>
+          <button class="key-btn" onclick="pressPin('5')">5</button>
+          <button class="key-btn" onclick="pressPin('6')">6</button>
+          <button class="key-btn" onclick="pressPin('7')">7</button>
+          <button class="key-btn" onclick="pressPin('8')">8</button>
+          <button class="key-btn" onclick="pressPin('9')">9</button>
+          <button class="key-btn" onclick="resetPin()" style="font-size:0.75rem;">Xóa</button>
+          <button class="key-btn" onclick="pressPin('0')">0</button>
+          <button class="key-btn" onclick="pressPin('0')">❤️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TÍNH NĂNG 2: QUÉT VÂN TAY MỞ KHÓA TRÁI TIM -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">✨ Hiệu ứng Cặp Đôi</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Màn mở đầu</span>
+        </div>
+        <h2>2. Cảm Biến Quét Vân Tay Mở Khóa Trái Tim</h2>
+        <p>Người nhận <b>nhấn giữ vào cảm biến vân tay</b> 1.2 giây để tia laser quét xác nhận "Chủ nhân trái tim" trước khi mở quà.</p>
+      </div>
+      <div class="demo-stage">
+        <div class="fp-circle" id="fpCircle" onmousedown="startFpScan()" onmouseup="stopFpScan()" ontouchstart="startFpScan()" ontouchend="stopFpScan()">
+          <div class="fp-scan-line"></div>
+          <span style="font-size:3.4rem;" id="fpIcon">🫆</span>
+        </div>
+        <div id="fpText" style="margin-top:16px;font-size:0.88rem;font-weight:700;color:#ff9ec0;">Nhấn và giữ vào vân tay để mở khóa</div>
+        <div style="width:160px;height:6px;background:rgba(255,255,255,0.1);border-radius:99px;margin-top:10px;overflow:hidden;">
+          <div id="fpBar" style="width:0%;height:100%;background:linear-gradient(90deg,#ff3e80,#00f5d4);transition:width 0.1s;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TÍNH NĂNG 3: GIẢ LẬP TIN NHẮN MESSENGER -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">💬 Kể chuyện (Storytelling)</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Màn dẫn truyện</span>
+        </div>
+        <h2>3. Hộp Chat Messenger Tự Động Nhắn Tin Tỏ Tình</h2>
+        <p>Giả lập cuộc trò chuyện Messenger tự động gõ từng tin nhắn đáng yêu rồi gửi nút "Mở bó hoa 20/10" ngay trong khung chat.</p>
+      </div>
+      <div class="demo-stage">
+        <div class="chat-box">
+          <div class="chat-header">
+            <img src="./assets/sample/bouquet-1.webp" style="width:28px;height:28px;border-radius:50%;object-fit:cover;">
+            <span>Anh Yêu ❤️</span>
+            <span style="margin-left:auto;font-size:0.7rem;color:#2ecc71;">● Đang hoạt động</span>
+          </div>
+          <div class="chat-messages" id="chatMessages"></div>
+          <button class="btn btn-pink" style="width:100%;justify-content:center;padding:8px;" onclick="playChatDemo()">▶️ Chạy thử đoạn chat tự động</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TÍNH NĂNG 4: ĐẾM NGÀY YÊU REAL-TIME -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">💕 Kỷ niệm Tình Yêu</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Gắn góc màn hình / Màn riêng</span>
+        </div>
+        <h2>4. Đồng Hồ Đếm Ngày Yêu (Ngày - Giờ - Phút - Giây)</h2>
+        <p>Hiển thị ảnh đại diện 2 người kèm trái tim đập và bộ đếm chính xác từng giây kể từ ngày bắt đầu yêu nhau.</p>
+      </div>
+      <div class="demo-stage">
+        <div class="couple-row">
+          <div style="text-align:center;">
+            <img class="avatar-circle" src="./assets/sample/bouquet-2.webp" alt="">
+            <div style="font-size:0.78rem;font-weight:700;margin-top:4px;">Anh</div>
+          </div>
+          <div class="beating-heart">💗</div>
+          <div style="text-align:center;">
+            <img class="avatar-circle" src="./assets/sample/bouquet-4.webp" alt="">
+            <div style="font-size:0.78rem;font-weight:700;margin-top:4px;">Em Bé</div>
+          </div>
+        </div>
+        <div style="font-size:0.8rem;color:#ff9ec0;margin-bottom:10px;font-weight:600;">Chúng mình đã bên nhau được:</div>
+        <div class="counter-grid">
+          <div class="counter-box"><div class="counter-num" id="cdDays">520</div><div class="counter-label">Ngày</div></div>
+          <div class="counter-box"><div class="counter-num" id="cdHours">14</div><div class="counter-label">Giờ</div></div>
+          <div class="counter-box"><div class="counter-num" id="cdMins">28</div><div class="counter-label">Phút</div></div>
+          <div class="counter-box"><div class="counter-num" id="cdSecs">00</div><div class="counter-label">Giây</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TÍNH NĂNG 5: VÒNG XOAY ẢNH 3D GALAXY -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">🌌 Hiệu ứng 3D</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Nâng cấp Màn 2</span>
+        </div>
+        <h2>5. Vòng Xoay Ảnh Kỷ Niệm 3D (3D Photo Ring)</h2>
+        <p>Các bức ảnh xếp thành vòng tròn không gian 3D tự động xoay tròn quanh tâm; chạm vào để dừng lại ngắm từng bức ảnh.</p>
+      </div>
+      <div class="demo-stage">
+        <div class="ring-scene">
+          <div class="ring-carousel">
+            <div class="ring-item" style="transform: rotateY(0deg) translateZ(115px);"><img src="./assets/sample/flying-1.webp"></div>
+            <div class="ring-item" style="transform: rotateY(60deg) translateZ(115px);"><img src="./assets/sample/flying-2.webp"></div>
+            <div class="ring-item" style="transform: rotateY(120deg) translateZ(115px);"><img src="./assets/sample/flying-3.webp"></div>
+            <div class="ring-item" style="transform: rotateY(180deg) translateZ(115px);"><img src="./assets/sample/flying-4.webp"></div>
+            <div class="ring-item" style="transform: rotateY(240deg) translateZ(115px);"><img src="./assets/sample/flying-6.webp"></div>
+            <div class="ring-item" style="transform: rotateY(300deg) translateZ(115px);"><img src="./assets/sample/flying-7.webp"></div>
+          </div>
+        </div>
+        <div style="margin-top:26px;font-size:0.8rem;color:var(--muted);">Di chuột / chạm vào vòng ảnh để tạm dừng xoay</div>
+      </div>
+    </div>
+
+    <!-- TÍNH NĂNG 6: SÁCH KỶ NIỆM LẬT TRANG 3D -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">📖 Album Kỷ Niệm</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Màn đọc kỷ niệm</span>
+        </div>
+        <h2>6. Sách Lưu Niệm Lật Từng Trang 3D (Flipbook)</h2>
+        <p>Bấm trực tiếp vào trang sách bên dưới để lật mở từng trang ảnh kỷ niệm kèm lời nhắn riêng cho từng bức hình!</p>
+      </div>
+      <div class="demo-stage">
+        <div class="book-wrap" onclick="flipNextPage()">
+          <div class="book-page" id="page3" style="z-index:1;">
+            <img src="./assets/sample/flying-8.webp">
+            <b style="font-size:0.88rem;color:#d91b5c;">Trang 3: Mãi bên nhau nhé</b>
+            <p style="font-size:0.76rem;margin:4px 0 0;">Chúc em bé của anh 20/10 ngập tràn tiếng cười! 💖</p>
+            <small style="margin-top:auto;color:#888;">(Bấm để đóng lại từ đầu)</small>
+          </div>
+          <div class="book-page" id="page2" style="z-index:2;">
+            <img src="./assets/sample/flying-3.webp">
+            <b style="font-size:0.88rem;color:#d91b5c;">Trang 2: Nụ cười của em</b>
+            <p style="font-size:0.76rem;margin:4px 0 0;">Khoảnh khắc nào bên em cũng thật dịu dàng ✨</p>
+            <small style="margin-top:auto;color:#888;">(Bấm để lật trang tiếp 👉)</small>
+          </div>
+          <div class="book-page" id="page1" style="z-index:3;">
+            <img src="./assets/sample/flying-1.webp">
+            <b style="font-size:0.88rem;color:#d91b5c;">Trang 1: Cuốn sổ kỷ niệm</b>
+            <p style="font-size:0.76rem;margin:4px 0 0;">Những bức hình đáng yêu nhất của cô gái anh thương 🌸</p>
+            <small style="margin-top:auto;color:#888;">(Bấm vào sách để lật trang 👉)</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TÍNH NĂNG 7: MƯA CHỮ MATRIX + PHÁO HOA -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">🎆 Bùng nổ Thị Giác</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Màn chuyển cảnh</span>
+        </div>
+        <h2>7. Mưa Chữ Matrix Hồng + Đếm Ngược Pháo Hoa</h2>
+        <p>Mưa ký tự tình yêu rơi xuống kết hợp đếm ngược <code>3 - 2 - 1 - 20/10 - YÊU EM</code> kèm pháo hoa rực rỡ.</p>
+      </div>
+      <div class="demo-stage" style="padding:0;">
+        <canvas id="matrixCanvas" width="360" height="360" style="width:100%;height:100%;"></canvas>
+        <div id="matrixCenterText" style="position:absolute;font-size:2rem;font-weight:900;color:#fff;text-shadow:0 0 20px #ff3e80,0 0 40px #ff3e80;text-align:center;padding:0 12px;pointer-events:none;">20 / 10 ❤️</div>
+      </div>
+    </div>
+
+    <!-- TÍNH NĂNG 8: BỐC THĂM HỘP QUÀ / VOUCHER TÌNH YÊU -->
+    <div class="feature-card">
+      <div class="card-head">
+        <div class="badge-row">
+          <span class="trend-badge">🎁 Tương tác Cuối Thư</span>
+          <span style="font-size:0.78rem;color:#ffd166;">Sau khi đọc thư xong</span>
+        </div>
+        <h2>8. Hộp Quà Bí Mật — Bốc Thăm "Voucher Tình Yêu"</h2>
+        <p>Sau khi đọc xong bức thư 20/10, người nhận được chọn 1 trong 3 hộp quà để mở ra phần thưởng thực tế do bạn cài sẵn!</p>
+      </div>
+      <div class="demo-stage">
+        <div style="font-size:0.86rem;font-weight:700;color:#ff9ec0;margin-bottom:14px;">Chạm vào 1 hộp quà bất kỳ để khui quà 20/10:</div>
+        <div class="voucher-boxes">
+          <div class="gacha-box" onclick="openVoucher(0)">🎁</div>
+          <div class="gacha-box" onclick="openVoucher(1)">🎀</div>
+          <div class="gacha-box" onclick="openVoucher(2)">💝</div>
+        </div>
+        <div id="voucherResult" style="min-height:84px;width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,95,143,0.35);border-radius:16px;padding:12px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <span style="font-size:0.82rem;color:var(--muted);">Chưa mở hộp quà nào...</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. PASSCODE & BEARS LOGIC
+    let currentPin = "";
+    const targetPin = "2010";
+    function updatePinUI() {
+      const dots = document.querySelectorAll("#pinDots .pin-dot");
+      dots.forEach((d, idx) => d.classList.toggle("filled", idx < currentPin.length));
+      const progress = Math.min(4, currentPin.length);
+      const pos = 10 + progress * 8.5;
+      document.getElementById("bearL").style.left = pos + "%";
+      document.getElementById("bearR").style.right = pos + "%";
+      document.getElementById("bearHeart").style.opacity = progress === 4 ? "1" : "0";
+    }
+    function pressPin(digit) {
+      if (currentPin.length >= 4) currentPin = "";
+      currentPin += digit;
+      updatePinUI();
+      if (currentPin.length === 4) {
+        const st = document.getElementById("pinStatus");
+        if (currentPin === targetPin) {
+          st.textContent = "🎉 Mở khóa thành công! 2 chú gấu đã ôm nhau 💖";
+          st.style.color = "#2ecc71";
+        } else {
+          st.textContent = "Thử nhập 2010 nhé! (Bạn vừa bấm " + currentPin + ")";
+          st.style.color = "#ffd166";
+        }
+      }
+    }
+    function resetPin() {
+      currentPin = "";
+      document.getElementById("pinStatus").textContent = "Nhập mật khẩu tình yêu: 2010";
+      document.getElementById("pinStatus").style.color = "#ff9ec0";
+      updatePinUI();
+    }
+
+    // 2. FINGERPRINT LOGIC
+    let fpInterval = null;
+    let fpProgress = 0;
+    function startFpScan() {
+      clearInterval(fpInterval);
+      document.getElementById("fpCircle").classList.add("fp-scanning");
+      document.getElementById("fpText").textContent = "Đang quét nhịp tim & vân tay...";
+      fpInterval = setInterval(() => {
+        fpProgress = Math.min(100, fpProgress + 8);
+        document.getElementById("fpBar").style.width = fpProgress + "%";
+        if (fpProgress >= 100) {
+          clearInterval(fpInterval);
+          document.getElementById("fpCircle").classList.remove("fp-scanning");
+          document.getElementById("fpIcon").textContent = "💖";
+          document.getElementById("fpText").textContent = "✓ Xác nhận thành công: Em Bé Của Anh!";
+          document.getElementById("fpText").style.color = "#00f5d4";
+        }
+      }, 80);
+    }
+    function stopFpScan() {
+      clearInterval(fpInterval);
+      document.getElementById("fpCircle").classList.remove("fp-scanning");
+      if (fpProgress < 100) {
+        fpProgress = 0;
+        document.getElementById("fpBar").style.width = "0%";
+        document.getElementById("fpText").textContent = "Nhấn giữ lâu hơn một chút nhé!";
+      } else {
+        setTimeout(() => {
+          fpProgress = 0;
+          document.getElementById("fpBar").style.width = "0%";
+          document.getElementById("fpIcon").textContent = "🫆";
+          document.getElementById("fpText").textContent = "Nhấn và giữ vào vân tay để mở khóa";
+          document.getElementById("fpText").style.color = "#ff9ec0";
+        }, 2000);
+      }
+    }
+
+    // 3. CHAT MESSENGER DEMO
+    const sampleChats = [
+      { side: "left", text: "Ting ting! Em bé đang làm gì đó? 😚" },
+      { side: "right", text: "Dạ em đang xem điện thoại nè anh ơi 💕" },
+      { side: "left", text: "Nhân ngày 20/10, anh có một bó hoa bí mật dành riêng cho em 🌹" },
+      { side: "left", text: "Chạm vào bó hoa để mở quà nha công chúa! ✨" }
+    ];
+    let chatTimer = null;
+    function playChatDemo() {
+      clearInterval(chatTimer);
+      const box = document.getElementById("chatMessages");
+      box.innerHTML = "";
+      let idx = 0;
+      function step() {
+        if (idx >= sampleChats.length) return;
+        const m = sampleChats[idx++];
+        const div = document.createElement("div");
+        div.className = "msg-bubble " + (m.side === "left" ? "msg-left" : "msg-right");
+        div.textContent = m.text;
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+      }
+      step();
+      chatTimer = setInterval(() => {
+        if (idx >= sampleChats.length) clearInterval(chatTimer);
+        else step();
+      }, 900);
+    }
+    playChatDemo();
+
+    // 4. LOVE COUNTER REALTIME
+    const startLoveDate = new Date("2025-05-15T00:00:00");
+    function updateLoveCounter() {
+      const diff = Math.max(0, Date.now() - startLoveDate.getTime());
+      const totalSec = Math.floor(diff / 1000);
+      const d = Math.floor(totalSec / 86400);
+      const h = Math.floor((totalSec % 86400) / 3600);
+      const m = Math.floor((totalSec % 3600) / 60);
+      const s = totalSec % 60;
+      document.getElementById("cdDays").textContent = d;
+      document.getElementById("cdHours").textContent = String(h).padStart(2, "0");
+      document.getElementById("cdMins").textContent = String(m).padStart(2, "0");
+      document.getElementById("cdSecs").textContent = String(s).padStart(2, "0");
+    }
+    setInterval(updateLoveCounter, 1000);
+    updateLoveCounter();
+
+    // 6. 3D FLIPBOOK
+    let currentBookPage = 1;
+    function flipNextPage() {
+      if (currentBookPage === 1) {
+        document.getElementById("page1").classList.add("flipped");
+        currentBookPage = 2;
+      } else if (currentBookPage === 2) {
+        document.getElementById("page2").classList.add("flipped");
+        currentBookPage = 3;
+      } else {
+        document.getElementById("page1").classList.remove("flipped");
+        document.getElementById("page2").classList.remove("flipped");
+        currentBookPage = 1;
+      }
+    }
+
+    // 7. MATRIX LOVE RAIN
+    (function initMatrix() {
+      const cv = document.getElementById("matrixCanvas");
+      const ctx = cv.getContext("2d");
+      const chars = "LOVE2010♥♡YÊUEM✨🌸";
+      const fontSize = 14;
+      const cols = Math.floor(cv.width / fontSize);
+      const drops = Array(cols).fill(1);
+      const words = ["3", "2", "1", "HAPPY 20/10", "YÊU EM ❤️", "MÃI BÊN NHAU"];
+      let wIdx = 0;
+      setInterval(() => {
+        wIdx = (wIdx + 1) % words.length;
+        document.getElementById("matrixCenterText").textContent = words[wIdx];
+      }, 1600);
+
+      setInterval(() => {
+        ctx.fillStyle = "rgba(11, 5, 13, 0.14)";
+        ctx.fillRect(0, 0, cv.width, cv.height);
+        ctx.fillStyle = "#ff4f8b";
+        ctx.font = "bold " + fontSize + "px monospace";
+        for (let i = 0; i < drops.length; i++) {
+          const ch = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > cv.height && Math.random() > 0.96) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }, 50);
+    })();
+
+    // 8. SECRET VOUCHER GACHA
+    const vouchers = [
+      { title: "🎟️ Voucher Ăn Tối Lãng Mạn", desc: "1 buổi đi ăn đồ nướng / lẩu bất kỳ do em chọn, anh bao trọn gói 100%!" },
+      { title: "🧋 Thẻ Quyền Lực Trà Sữa & Đồ Ngọt", desc: "Miễn phí trà sữa full topping + bánh ngọt suốt cả tuần lễ 20/10!" },
+      { title: "👗 Phiếu Mua Sắm Công Chúa", desc: "Chốt đơn ngay 1 món đồ trong giỏ hàng Shopee/TikTok Shop của em!" }
+    ];
+    function openVoucher(idx) {
+      const v = vouchers[idx];
+      const box = document.getElementById("voucherResult");
+      box.innerHTML = `
+        <div style="font-size:0.95rem;font-weight:800;color:#ffd166;margin-bottom:4px;">🎉 Chúc mừng em nhận được: ${v.title}</div>
+        <div style="font-size:0.8rem;color:#fff;line-height:1.4;">${v.desc}</div>
+      `;
+    }
+  </script>
+</body>
+</html>

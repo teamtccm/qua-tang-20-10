@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trạm Chỉnh Sửa Thông Điệp & Tạo QR Trái Tim 20/10 💖</title>
+  <title>Trạm Chỉnh Sửa Thông Điệp & Tạo Nhiều QR Trái Tim 20/10 💖</title>
   <script src="./cauhinh.js"></script>
   <!-- Thư viện tạo ma trận QR chuẩn trên trình duyệt -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -38,7 +38,7 @@
     }
     header h1 {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 800;
     }
     header .header-actions {
@@ -206,28 +206,100 @@
       color: #117a37;
       margin-bottom: 10px;
     }
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .pill {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .pill.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+    .new-feature-card {
+      border: 2px solid #ff75a0;
+      background: linear-gradient(180deg, #fff9fb 0%, #ffffff 100%);
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🌸 Trạm Chỉnh Sửa Web Quà Tặng 20/10 & Tạo QR Trái Tim</h1>
+    <h1>🌸 Trạm Quản Lý Nhiều Thiệp 20/10 & Tạo QR Trái Tim (Chỉ cần 1 Web GitHub)</h1>
     <div class="header-actions">
-      <button class="btn btn-white" onclick="applyAndPreview()">🔄 Cập nhật Xem thử</button>
-      <button class="btn btn-white" onclick="downloadCauHinhJS()">💾 Tải file cauhinh.js</button>
-      <a class="btn btn-outline" href="./index.html" target="_blank">🚀 Mở trang Web gốc</a>
+      <span id="saveStatus" style="font-size:0.85rem;font-weight:700;background:rgba(255,255,255,0.2);padding:8px 12px;border-radius:10px;display:inline-flex;align-items:center;">✓ Đã đồng bộ</span>
+      <button class="btn btn-white" onclick="saveDirectlyToDisk()">💾 Lưu vào Web & Xem thử</button>
+      <button class="btn btn-outline" onclick="downloadCauHinhJS()">⬇️ Tải file cauhinh.js</button>
+      <a class="btn btn-outline" id="openCardLinkBtn" href="./index.html" target="_blank">🚀 Mở trang Thiệp này</a>
     </div>
   </header>
 
   <div class="layout">
     <!-- CỘT TRÁI: CÁC Ô CHỈNH SỬA THÔNG ĐIỆP -->
     <div>
+      <!-- MỤC 0: QUẢN LÝ NHIỀU MÃ QR TRÊN CÙNG 1 TRANG WEB -->
+      <div class="card" style="border: 2px solid #ff9ec0; background: #fff9fb;">
+        <h2>🗂️ Quản lý Danh sách Thiệp / Mã QR (Tạo vô số QR trên 1 Web duy nhất)</h2>
+        <p class="hint">
+          Chỉ cần 1 web trên GitHub, mỗi người nhận sẽ có một mã ID riêng (ví dụ: <code>?id=em-be</code>, <code>?id=me-yeu</code>, <code>?id=khach-01</code>). Chọn thiệp bên dưới hoặc bấm <b>➕ Tạo mã QR mới</b>:
+        </p>
+
+        <div class="pill-list" id="cardPills"></div>
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <input type="text" id="newCardIdInput" placeholder="Nhập mã thiệp mới (VD: me-yeu, ban-gai, khach-01...)" style="margin-bottom: 0; flex: 1;">
+          <button class="btn btn-pink" onclick="createNewCard()">➕ Tạo mã QR mới</button>
+        </div>
+      </div>
+
+      <!-- TÍNH NĂNG MỚI 1: KHÓA MẬT KHẨU 4 SỐ & 2 CHÚ GẤU ÔM NHAU -->
+      <div class="card new-feature-card">
+        <h2>🔐 Màn Mở Đầu: Khóa Mật Khẩu Kỷ Niệm 4 Số + 2 Chú Gấu Ôm Nhau</h2>
+        <p class="hint">Trước khi mở bó hoa, người nhận bấm đúng 4 chữ số mật khẩu để 2 chú gấu chạy lại ôm nhau và mở khóa trái tim.</p>
+
+        <div class="grid-2">
+          <div>
+            <label for="passcodeEnabled">Trạng thái màn khóa mật khẩu:</label>
+            <select id="passcodeEnabled" onchange="autoSaveDraft()">
+              <option value="true">🔐 Bật khóa mật khẩu + 2 chú gấu</option>
+              <option value="false">🔓 Tắt (Vào thẳng bó hoa)</option>
+            </select>
+          </div>
+          <div>
+            <label for="passcodePin">Mật khẩu 4 số (VD: 2010, ngày sinh...):</label>
+            <input type="text" id="passcodePin" maxlength="6" placeholder="2010" oninput="autoSaveDraft()">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label for="passcodeTitle">Tiêu đề màn khóa:</label>
+            <input type="text" id="passcodeTitle" oninput="autoSaveDraft()">
+          </div>
+          <div>
+            <label for="passcodeHint">Gợi ý hiện ra khi bấm sai mật khẩu:</label>
+            <input type="text" id="passcodeHint" oninput="autoSaveDraft()">
+          </div>
+        </div>
+      </div>
+
       <!-- MỤC 1: LỜI CHÚC 3D BAY LƠ LỬNG -->
       <div class="card">
         <h2>✨ 1. Các câu chúc bay trong Không Gian 3D (Màn 2)</h2>
         <p class="hint">Mỗi dòng là một câu chúc phát sáng neon bay lơ lửng khi người nhận ấn giữ bó hoa. Bạn có thể sửa, thêm hoặc xóa tùy ý.</p>
         <label for="flyingTexts">Danh sách câu chúc (mỗi dòng 1 câu):</label>
-        <textarea id="flyingTexts" rows="9" oninput="autoSaveDraft()"></textarea>
+        <textarea id="flyingTexts" rows="8" oninput="autoSaveDraft()"></textarea>
 
         <div class="grid-2">
           <div>
@@ -269,10 +341,33 @@
         </div>
 
         <label for="letterText">Nội dung bức thư (Dòng đầu bắt đầu bằng "Gửi..." sẽ được in bằng font chữ ký lớn):</label>
-        <textarea id="letterText" rows="7" oninput="autoSaveDraft()"></textarea>
+        <textarea id="letterText" rows="6" oninput="autoSaveDraft()"></textarea>
 
         <label for="letterPhoto">Đường dẫn ảnh nhỏ ở góc dưới bên phải lá thư:</label>
         <input type="text" id="letterPhoto" oninput="autoSaveDraft()">
+      </div>
+
+      <!-- TÍNH NĂNG MỚI 2: BỐC THĂM HỘP QUÀ BÍ MẬT — VOUCHER TÌNH YÊU CUỐI THƯ -->
+      <div class="card new-feature-card">
+        <h2>🎁 Cuối Bức Thư: Bốc Thăm Hộp Quà Bí Mật — "Voucher Tình Yêu"</h2>
+        <p class="hint">Khi người nhận mở bức thư 20/10 ra đọc, nút <b>Mở Hộp Quà Bí Mật</b> sẽ xuất hiện ở dưới bức thư để người nhận chọn 1 trong 3 hộp quà và bốc trúng Voucher bạn cài bên dưới!</p>
+
+        <div class="grid-2">
+          <div>
+            <label for="vouchersEnabled">Trạng thái Hộp Quà Bí Mật cuối thư:</label>
+            <select id="vouchersEnabled" onchange="autoSaveDraft()">
+              <option value="true">🎁 Bật 3 Hộp Quà Voucher cuối thư</option>
+              <option value="false">⚪ Tắt Hộp Quà cuối thư</option>
+            </select>
+          </div>
+          <div>
+            <label for="voucherBtnText">Chữ trên nút mở hộp quà:</label>
+            <input type="text" id="voucherBtnText" oninput="autoSaveDraft()">
+          </div>
+        </div>
+
+        <label for="voucherItems">Nội dung 3 phần thưởng tương ứng với 3 Hộp Quà (mỗi dòng 1 phần thưởng):</label>
+        <textarea id="voucherItems" rows="4" oninput="autoSaveDraft()"></textarea>
       </div>
 
       <!-- MỤC 3: ẢNH BÓ HOA, ẢNH BAY 3D & NHẠC NỀN -->
@@ -298,10 +393,13 @@
       <!-- MỤC 4: TẠO MÃ QR TRÁI TIM 20/10 -->
       <div class="card">
         <h2>💖 4. Cài đặt Link đích cho Thiệp QR Trái Tim 20/10</h2>
-        <p class="hint">Nhập đường link GitHub Pages / Vercel của bạn (ví dụ: <code>https://ten-ban.github.io/qua-20-10/</code>) để vẽ mã QR Trái Tim trỏ thẳng về trang web!</p>
+        <p class="hint">Chỉ cần nhập tên miền GitHub Pages của bạn (ví dụ: <code>https://ten-ban.github.io/qua-20-10/</code>), hệ thống sẽ tự động gắn đuôi <code>?id=ma-thiep</code> tương ứng cho từng tấm QR!</p>
 
-        <label for="qrBaseUrl">Đường dẫn trang Web khi quét QR:</label>
+        <label for="qrBaseUrl">Tên miền Web gốc của bạn (Base URL):</label>
         <input type="text" id="qrBaseUrl" value="" placeholder="VD: https://username.github.io/qua-tang-20-10/" oninput="renderHeartQRCard()">
+
+        <label>Link đầy đủ được mã hóa vào tấm QR hiện tại:</label>
+        <div id="fullQrLinkPreview" style="padding:10px 12px;background:#fff0f5;border:1px dashed #ff5f8f;border-radius:10px;font-family:monospace;font-size:0.86rem;color:#d91b5c;margin-bottom:12px;word-break:break-all;"></div>
 
         <div class="grid-2">
           <div>
@@ -344,10 +442,10 @@
       <!-- KHUNG 2: THIỆP QR TRÁI TIM 20/10 -->
       <div id="panelQr" style="display: none;">
         <div class="qr-preview-box">
-          <span class="status-badge">✓ Thuật toán Tim Dệt chuẩn 100%</span>
+          <span class="status-badge" id="qrCardBadge">✓ Thiệp: macdinh</span>
           <canvas id="qrCardCanvas" width="1400" height="1820"></canvas>
           <div style="margin-top: 12px; display: flex; gap: 8px;">
-            <button class="btn btn-pink" style="flex:1; justify-content:center;" onclick="downloadQRCard()">⬇️ Tải ảnh Thiệp QR (PNG nét cao)</button>
+            <button class="btn btn-pink" style="flex:1; justify-content:center;" onclick="downloadQRCard()">⬇️ Tải ảnh Thiệp QR này (PNG)</button>
           </div>
         </div>
       </div>
@@ -361,13 +459,44 @@
       71c7: { bg: "./templates/bg_71c7.jpg", x: 52.4614092, y: 79.5500464, w: 53.0, rot: 5 }
     };
 
+    let currentCardId = "macdinh";
+    let allCardsMap = {};
+
     function getBaseDirUrl() {
       const loc = window.location.href.split("?")[0].split("#")[0];
       return loc.replace(/\/[^\/]*$/, "/");
     }
 
-    function loadFormFromConfig() {
-      const cfg = window.CAU_HINH_QUA_TANG || {};
+    function getFullQrLinkForCurrentCard() {
+      let base = (document.getElementById("qrBaseUrl").value || "").trim() || getBaseDirUrl();
+      if (!base.endsWith("/") && !base.endsWith(".html")) base += "/";
+      if (currentCardId === "macdinh") return base;
+      return base + (base.includes("?") ? "&" : "?") + "id=" + encodeURIComponent(currentCardId);
+    }
+
+    function renderCardPills() {
+      const container = document.getElementById("cardPills");
+      const ids = Array.from(new Set(["macdinh", ...Object.keys(allCardsMap)]));
+      container.innerHTML = ids.map(cid => `
+        <button type="button" class="pill ${cid === currentCardId ? "active" : ""}" onclick="selectCard('${cid}')">
+          ${cid === "macdinh" ? "🏠 Mặc định (macdinh)" : "💌 " + cid}
+        </button>
+      `).join("");
+      const openBtn = document.getElementById("openCardLinkBtn");
+      if (openBtn) {
+        openBtn.href = currentCardId === "macdinh" ? "./index.html" : `./index.html?id=${encodeURIComponent(currentCardId)}`;
+      }
+      const badge = document.getElementById("qrCardBadge");
+      if (badge) badge.textContent = `✓ Mã QR của thiệp: ${currentCardId}`;
+    }
+
+    function populateFormWithConfig(cfg) {
+      const passCfg = cfg.passcode || {};
+      document.getElementById("passcodeEnabled").value = String(passCfg.enabled !== false);
+      document.getElementById("passcodePin").value = passCfg.pin || "2010";
+      document.getElementById("passcodeTitle").value = passCfg.title || "Nhập mật khẩu tình yêu 💖";
+      document.getElementById("passcodeHint").value = passCfg.hint || "Gợi ý: Ngày Phụ nữ Việt Nam (4 chữ số: 2010)";
+
       document.getElementById("flyingTexts").value = (cfg.flyingTexts || []).join("\n");
       document.getElementById("palette").value = cfg.palette || "hongdon";
       document.getElementById("flyingHearts").value = String(cfg.flyingHearts !== false);
@@ -379,12 +508,69 @@
       document.getElementById("letterText").value = (cfg.letter && cfg.letter.text) || "";
       document.getElementById("letterPhoto").value = (cfg.letter && cfg.letter.photo) || "./assets/sample/bouquet-4.webp";
 
+      const vCfg = cfg.vouchers || {};
+      document.getElementById("vouchersEnabled").value = String(vCfg.enabled !== false);
+      document.getElementById("voucherBtnText").value = vCfg.buttonText || "🎁 Mở Hộp Quà Bí Mật 20/10";
+      const defaultVoucherItems = [
+        "🎟️ Voucher Ăn Tối Lãng Mạn: 1 buổi đi ăn đồ nướng / lẩu bất kỳ do em chọn, anh bao trọn gói 100%!",
+        "🧋 Thẻ Quyền Lực Trà Sữa & Đồ Ngọt: Miễn phí trà sữa full topping + bánh ngọt suốt cả tuần lễ 20/10!",
+        "👗 Phiếu Mua Sắm Công Chúa: Chốt đơn ngay 1 món đồ bất kỳ trong giỏ hàng Shopee / TikTok Shop của em!"
+      ];
+      document.getElementById("voucherItems").value = (Array.isArray(vCfg.items) && vCfg.items.length ? vCfg.items : defaultVoucherItems).join("\n");
+
       document.getElementById("bgMusic").value = cfg.bgMusic || "./assets/music/tiktok-20-10.mp3";
       document.getElementById("bouquetImages").value = (cfg.bouquetImages || []).join("\n");
       document.getElementById("flyingImages").value = (cfg.flyingImages || []).join("\n");
+    }
+
+    function selectCard(cid) {
+      currentCardId = cid;
+      const cfg = allCardsMap[cid] || window.CAU_HINH_QUA_TANG || {};
+      populateFormWithConfig(cfg);
+      renderCardPills();
+      localStorage.setItem("CUSTOM_GIFT_CONFIG_20_10", JSON.stringify(cfg));
+      const iframe = document.getElementById("previewIframe");
+      iframe.src = "./index.html?preview=1&t=" + Date.now();
+      renderHeartQRCard();
+    }
+
+    async function createNewCard() {
+      const raw = document.getElementById("newCardIdInput").value.trim();
+      const slug = raw
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d").replace(/Đ/g, "D")
+        .replace(/[^a-zA-Z0-9_-]/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "")
+        .toLowerCase();
+      if (!slug) {
+        alert("Vui lòng nhập tên mã thiệp (ví dụ: me-yeu, ban-gai, khach-01)!");
+        return;
+      }
+      const currentCfg = collectConfigFromForm();
+      allCardsMap[slug] = JSON.parse(JSON.stringify(currentCfg));
+      document.getElementById("newCardIdInput").value = "";
+      currentCardId = slug;
+      renderCardPills();
+      await saveDirectlyToDisk();
+    }
+
+    async function loadFormFromConfig() {
+      const baseCfg = window.CAU_HINH_QUA_TANG || {};
+      allCardsMap = Object.assign({ macdinh: baseCfg }, window.DANH_SACH_THIEP || {});
+      try {
+        const res = await fetch("/api/cards");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.cards && Object.keys(data.cards).length > 0) {
+            allCardsMap = Object.assign({ macdinh: baseCfg }, data.cards);
+          }
+        }
+      } catch (e) {}
 
       document.getElementById("qrBaseUrl").value = getBaseDirUrl();
-
+      renderCardPills();
+      populateFormWithConfig(allCardsMap[currentCardId] || baseCfg);
       autoSaveDraft();
       renderHeartQRCard();
     }
@@ -396,8 +582,17 @@
         .split("\n").map(s => s.trim()).filter(Boolean);
       const flyingTexts = document.getElementById("flyingTexts").value
         .split("\n").map(s => s.trim()).filter(Boolean);
+      const voucherItems = document.getElementById("voucherItems").value
+        .split("\n").map(s => s.trim()).filter(Boolean);
 
       return {
+        passcode: {
+          enabled: document.getElementById("passcodeEnabled").value === "true",
+          pin: document.getElementById("passcodePin").value.trim() || "2010",
+          title: document.getElementById("passcodeTitle").value.trim() || "Nhập mật khẩu tình yêu 💖",
+          subtitle: "Nhập đúng 4 chữ số đặc biệt để 2 chú gấu gặp nhau và mở bó hoa nhé!",
+          hint: document.getElementById("passcodeHint").value.trim()
+        },
         enableRain: true,
         enableLetter: true,
         flyingHearts: document.getElementById("flyingHearts").value === "true",
@@ -412,6 +607,13 @@
           text: document.getElementById("letterText").value,
           photo: document.getElementById("letterPhoto").value.trim()
         },
+        vouchers: {
+          enabled: document.getElementById("vouchersEnabled").value === "true",
+          buttonText: document.getElementById("voucherBtnText").value.trim() || "🎁 Mở Hộp Quà Bí Mật 20/10",
+          modalTitle: "🎁 Bốc Thăm Hộp Quà Bí Mật 20/10",
+          modalSubtitle: "Chạm vào 1 trong 3 hộp quà bên dưới để nhận phần thưởng đặc quyền từ anh nhé!",
+          items: voucherItems
+        },
         bouquetImages,
         bouquetCutouts: bouquetImages.map(() => true),
         flyingImages,
@@ -420,25 +622,64 @@
       };
     }
 
-    function autoSaveDraft() {
-      const cfg = collectConfigFromForm();
-      localStorage.setItem("CUSTOM_GIFT_CONFIG_20_10", JSON.stringify(cfg));
+    let saveTimer = null;
+    function setSaveBadge(text, bg = "rgba(255,255,255,0.2)") {
+      const el = document.getElementById("saveStatus");
+      if (el) {
+        el.textContent = text;
+        el.style.background = bg;
+      }
     }
 
-    function applyAndPreview() {
-      autoSaveDraft();
+    async function persistToDiskQuietly(cfg) {
+      allCardsMap[currentCardId] = cfg;
+      try {
+        const res = await fetch("/api/save-config", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cardId: currentCardId, config: cfg })
+        });
+        if (res.ok) {
+          setSaveBadge(`✓ Đã lưu thiệp [${currentCardId}]`, "rgba(16, 185, 129, 0.35)");
+          return true;
+        }
+      } catch (e) {}
+      return false;
+    }
+
+    function autoSaveDraft() {
+      const cfg = collectConfigFromForm();
+      allCardsMap[currentCardId] = cfg;
+      localStorage.setItem("CUSTOM_GIFT_CONFIG_20_10", JSON.stringify(cfg));
+      setSaveBadge("⏳ Đang lưu...", "rgba(245, 158, 11, 0.35)");
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => persistToDiskQuietly(cfg), 400);
+    }
+
+    async function saveDirectlyToDisk() {
+      const cfg = collectConfigFromForm();
+      localStorage.setItem("CUSTOM_GIFT_CONFIG_20_10", JSON.stringify(cfg));
+      await persistToDiskQuietly(cfg);
       const iframe = document.getElementById("previewIframe");
       iframe.src = "./index.html?preview=1&t=" + Date.now();
       renderHeartQRCard();
     }
 
+    function applyAndPreview() {
+      saveDirectlyToDisk();
+    }
+
     function downloadCauHinhJS() {
       const cfg = collectConfigFromForm();
+      allCardsMap[currentCardId] = cfg;
+      const defaultCfg = allCardsMap["macdinh"] || cfg;
       const content = `// ============================================================================
-// 🌸 FILE CẤU HÌNH THÔNG ĐIỆP QUÀ TẶNG 20/10 (DỄ DÀNG CHỈNH SỬA) 🌸
+// 🌸 FILE CẤU HÌNH THÔNG ĐIỆP & DANH SÁCH NHIỀU THIỆP QR 20/10 🌸
 // ============================================================================
 
-window.CAU_HINH_QUA_TANG = ${JSON.stringify(cfg, null, 2)};
+window.CAU_HINH_QUA_TANG = ${JSON.stringify(defaultCfg, null, 2)};
+
+window.DANH_SACH_THIEP = ${JSON.stringify(allCardsMap, null, 2)};
 `;
       const blob = new Blob([content], { type: "application/javascript;charset=utf-8" });
       const a = document.createElement("a");
@@ -573,7 +814,10 @@ window.CAU_HINH_QUA_TANG = ${JSON.stringify(cfg, null, 2)};
     }
 
     async function renderHeartQRCard() {
-      const link = (document.getElementById("qrBaseUrl").value || "").trim() || getBaseDirUrl();
+      const link = getFullQrLinkForCurrentCard();
+      const linkPreview = document.getElementById("fullQrLinkPreview");
+      if (linkPreview) linkPreview.textContent = link;
+
       const tplKey = document.getElementById("qrTemplate").value || "cb44";
       const colorHex = document.getElementById("qrColor").value || "#e72626";
       const tpl = TEMPLATES[tplKey] || TEMPLATES.cb44;
@@ -614,7 +858,7 @@ window.CAU_HINH_QUA_TANG = ${JSON.stringify(cfg, null, 2)};
       cardCv.toBlob(blob => {
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download = "thiep-qr-trai-tim-20-10.png";
+        a.download = `thiep-qr-20-10-${currentCardId}.png`;
         a.click();
       }, "image/png");
     }
