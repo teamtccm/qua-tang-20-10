@@ -90,14 +90,20 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             return
 
         if self.path == "/api/upload-image":
+            import unicodedata
             try:
                 data = json.loads(body.decode("utf-8"))
-                filename = os.path.basename(data.get("filename", f"img-{int(time.time())}.png"))
+                raw_name = os.path.basename(data.get("filename", f"img-{int(time.time())}.png"))
+                base_n, ext_n = os.path.splitext(raw_name)
+                s_n = unicodedata.normalize("NFD", base_n)
+                s_n = "".join(c for c in s_n if unicodedata.category(c) != "Mn").replace("đ", "d").replace("Đ", "D")
+                s_n = re.sub(r"[^a-zA-Z0-9_-]+", "-", s_n).strip("-").lower() or "img"
+                ext_n = re.sub(r"[^a-zA-Z0-9.]+", "", ext_n).lower() or ".jpg"
                 b64_data = data.get("dataUrl", "").split(",")[-1]
                 raw_bytes = base64.b64decode(b64_data)
                 sample_dir = os.path.join(ROOT_DIR, "assets", "sample")
                 os.makedirs(sample_dir, exist_ok=True)
-                safe_name = f"custom-{int(time.time()*1000)}-{filename}"
+                safe_name = f"custom-{int(time.time()*1000)}-{s_n}{ext_n}"
                 out_path = os.path.join(sample_dir, safe_name)
                 with open(out_path, "wb") as f:
                     f.write(raw_bytes)

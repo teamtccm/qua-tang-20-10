@@ -54,7 +54,7 @@ window.CAU_HINH_QUA_TANG = {
       "bottomLine": "Lời ngỏ hihi"
     },
     "text": "Gửi chị iu thợ săn cún và hhn\nNhân 20-10 em chút Giang iu bóng bẻ luôn xinh đẹp, đáng yêu. Dịu dang với em và tbm với cả thế giới\nGiang và tui mới quen nhau thôi và còn quen qua mạng nữa. Tuy không biết sẽ tới đâu nhưng hiện tại em vẫn cảm thấy rất vui vì có Giangở bên\n\nCún cảm ơn Giang nhìuuu ạ",
-    "photo": "./assets/sample/custom-1792512780851-ảnh chị 54.png"
+    "photo": "./assets/sample/custom-1792512780851-anh-chi-54.png"
   },
   "vouchers": {
     "enabled": false,
@@ -68,12 +68,12 @@ window.CAU_HINH_QUA_TANG = {
     ]
   },
   "bouquetImages": [
-    "./assets/sample/custom-1792512689666-ảnh chị 8.jpg",
-    "./assets/sample/custom-1792512689703-ảnh chị 54.png",
-    "./assets/sample/custom-1792512689878-ảnh chị.jpg",
-    "./assets/sample/custom-1792512689918-ảnh chị1.jpg",
-    "./assets/sample/custom-1792512689970-ảnh chị2.jpg",
-    "./assets/sample/custom-1792512690014-ảnh chị3.jpg"
+    "./assets/sample/custom-1792512689666-anh-chi-8.jpg",
+    "./assets/sample/custom-1792512689703-anh-chi-54.png",
+    "./assets/sample/custom-1792512689878-anh-chi.jpg",
+    "./assets/sample/custom-1792512689918-anh-chi1.jpg",
+    "./assets/sample/custom-1792512689970-anh-chi2.jpg",
+    "./assets/sample/custom-1792512690014-anh-chi3.jpg"
   ],
   "bouquetCutouts": [
     true,
@@ -84,20 +84,20 @@ window.CAU_HINH_QUA_TANG = {
     true
   ],
   "flyingImages": [
-    "./assets/sample/custom-1792512690055-ảnh chị4.jpg",
-    "./assets/sample/custom-1792512690092-ảnh chị5.jpg",
-    "./assets/sample/custom-1792512690138-ảnh chị7.jpg",
-    "./assets/sample/custom-1792512690146-ảnh chị45.jpg",
-    "./assets/sample/custom-1792512739872-ảnh chị 8.jpg",
-    "./assets/sample/custom-1792512739898-ảnh chị 54.png",
-    "./assets/sample/custom-1792512739940-ảnh chị.jpg",
-    "./assets/sample/custom-1792512739975-ảnh chị1.jpg",
-    "./assets/sample/custom-1792512740009-ảnh chị2.jpg",
-    "./assets/sample/custom-1792512740104-ảnh chị3.jpg",
-    "./assets/sample/custom-1792512740149-ảnh chị4.jpg",
-    "./assets/sample/custom-1792512740178-ảnh chị5.jpg",
-    "./assets/sample/custom-1792512740240-ảnh chị7.jpg",
-    "./assets/sample/custom-1792512740247-ảnh chị45.jpg"
+    "./assets/sample/custom-1792512690055-anh-chi4.jpg",
+    "./assets/sample/custom-1792512690092-anh-chi5.jpg",
+    "./assets/sample/custom-1792512690138-anh-chi7.jpg",
+    "./assets/sample/custom-1792512690146-anh-chi45.jpg",
+    "./assets/sample/custom-1792512739872-anh-chi-8.jpg",
+    "./assets/sample/custom-1792512739898-anh-chi-54.png",
+    "./assets/sample/custom-1792512739940-anh-chi.jpg",
+    "./assets/sample/custom-1792512739975-anh-chi1.jpg",
+    "./assets/sample/custom-1792512740009-anh-chi2.jpg",
+    "./assets/sample/custom-1792512740104-anh-chi3.jpg",
+    "./assets/sample/custom-1792512740149-anh-chi4.jpg",
+    "./assets/sample/custom-1792512740178-anh-chi5.jpg",
+    "./assets/sample/custom-1792512740240-anh-chi7.jpg",
+    "./assets/sample/custom-1792512740247-anh-chi45.jpg"
   ],
   "bgMusic": "./assets/music/tiktok-20-10.mp3",
   "showWatermark": false
@@ -156,7 +156,7 @@ window.DANH_SACH_THIEP = {
         "bottomLine": "Lời ngỏ hihi"
       },
       "text": "Gửi chị iu thợ săn cún và hhn\nNhân 20-10 em chút Giang iu bóng bẻ luôn xinh đẹp, đáng yêu. Dịu dang với em và tbm với cả thế giới\nGiang và tui mới quen nhau thôi và còn quen qua mạng nữa. Tuy không biết sẽ tới đâu nhưng hiện tại em vẫn cảm thấy rất vui vì có Giangở bên\n\nCún cảm ơn Giang nhìuuu ạ",
-      "photo": "./assets/sample/custom-1792512780851-ảnh chị 54.png"
+      "photo": "./assets/sample/custom-1792512780851-anh-chi-54.png"
     },
     "vouchers": {
       "enabled": false,
@@ -170,12 +170,12 @@ window.DANH_SACH_THIEP = {
       ]
     },
     "bouquetImages": [
-      "./assets/sample/custom-1792512689666-ảnh chị 8.jpg",
-      "./assets/sample/custom-1792512689703-ảnh chị 54.png",
-      "./assets/sample/custom-1792512689878-ảnh chị.jpg",
-      "./assets/sample/custom-1792512689918-ảnh chị1.jpg",
-      "./assets/sample/custom-1792512689970-ảnh chị2.jpg",
-      "./assets/sample/custom-1792512690014-ảnh chị3.jpg"
+      "./assets/sample/custom-1792512689666-anh-chi-8.jpg",
+      "./assets/sample/custom-1792512689703-anh-chi-54.png",
+      "./assets/sample/custom-1792512689878-anh-chi.jpg",
+      "./assets/sample/custom-1792512689918-anh-chi1.jpg",
+      "./assets/sample/custom-1792512689970-anh-chi2.jpg",
+      "./assets/sample/custom-1792512690014-anh-chi3.jpg"
     ],
     "bouquetCutouts": [
       true,
@@ -186,20 +186,20 @@ window.DANH_SACH_THIEP = {
       true
     ],
     "flyingImages": [
-      "./assets/sample/custom-1792512690055-ảnh chị4.jpg",
-      "./assets/sample/custom-1792512690092-ảnh chị5.jpg",
-      "./assets/sample/custom-1792512690138-ảnh chị7.jpg",
-      "./assets/sample/custom-1792512690146-ảnh chị45.jpg",
-      "./assets/sample/custom-1792512739872-ảnh chị 8.jpg",
-      "./assets/sample/custom-1792512739898-ảnh chị 54.png",
-      "./assets/sample/custom-1792512739940-ảnh chị.jpg",
-      "./assets/sample/custom-1792512739975-ảnh chị1.jpg",
-      "./assets/sample/custom-1792512740009-ảnh chị2.jpg",
-      "./assets/sample/custom-1792512740104-ảnh chị3.jpg",
-      "./assets/sample/custom-1792512740149-ảnh chị4.jpg",
-      "./assets/sample/custom-1792512740178-ảnh chị5.jpg",
-      "./assets/sample/custom-1792512740240-ảnh chị7.jpg",
-      "./assets/sample/custom-1792512740247-ảnh chị45.jpg"
+      "./assets/sample/custom-1792512690055-anh-chi4.jpg",
+      "./assets/sample/custom-1792512690092-anh-chi5.jpg",
+      "./assets/sample/custom-1792512690138-anh-chi7.jpg",
+      "./assets/sample/custom-1792512690146-anh-chi45.jpg",
+      "./assets/sample/custom-1792512739872-anh-chi-8.jpg",
+      "./assets/sample/custom-1792512739898-anh-chi-54.png",
+      "./assets/sample/custom-1792512739940-anh-chi.jpg",
+      "./assets/sample/custom-1792512739975-anh-chi1.jpg",
+      "./assets/sample/custom-1792512740009-anh-chi2.jpg",
+      "./assets/sample/custom-1792512740104-anh-chi3.jpg",
+      "./assets/sample/custom-1792512740149-anh-chi4.jpg",
+      "./assets/sample/custom-1792512740178-anh-chi5.jpg",
+      "./assets/sample/custom-1792512740240-anh-chi7.jpg",
+      "./assets/sample/custom-1792512740247-anh-chi45.jpg"
     ],
     "bgMusic": "./assets/music/tiktok-20-10.mp3",
     "showWatermark": false
@@ -255,7 +255,7 @@ window.DANH_SACH_THIEP = {
         "bottomLine": "Lời ngỏ hihi"
       },
       "text": "Gửi chị iu thợ săn cún và hhn\nNhân 20-10 em chút Giang iu bóng bẻ luôn xinh đẹp, đáng yêu. Dịu dang với em và tbm với cả thế giới\nGiang và tui mới quen nhau thôi và còn quen qua mạng nữa. Tuy không biết sẽ tới đâu nhưng hiện tại em vẫn cảm thấy rất vui vì có Giangở bên\n\nCún cảm ơn Giang nhìuuu ạ",
-      "photo": "./assets/sample/custom-1792512780851-ảnh chị 54.png"
+      "photo": "./assets/sample/custom-1792512780851-anh-chi-54.png"
     },
     "vouchers": {
       "enabled": false,
@@ -269,12 +269,12 @@ window.DANH_SACH_THIEP = {
       ]
     },
     "bouquetImages": [
-      "./assets/sample/custom-1792512689666-ảnh chị 8.jpg",
-      "./assets/sample/custom-1792512689703-ảnh chị 54.png",
-      "./assets/sample/custom-1792512689878-ảnh chị.jpg",
-      "./assets/sample/custom-1792512689918-ảnh chị1.jpg",
-      "./assets/sample/custom-1792512689970-ảnh chị2.jpg",
-      "./assets/sample/custom-1792512690014-ảnh chị3.jpg"
+      "./assets/sample/custom-1792512689666-anh-chi-8.jpg",
+      "./assets/sample/custom-1792512689703-anh-chi-54.png",
+      "./assets/sample/custom-1792512689878-anh-chi.jpg",
+      "./assets/sample/custom-1792512689918-anh-chi1.jpg",
+      "./assets/sample/custom-1792512689970-anh-chi2.jpg",
+      "./assets/sample/custom-1792512690014-anh-chi3.jpg"
     ],
     "bouquetCutouts": [
       true,
@@ -285,20 +285,20 @@ window.DANH_SACH_THIEP = {
       true
     ],
     "flyingImages": [
-      "./assets/sample/custom-1792512690055-ảnh chị4.jpg",
-      "./assets/sample/custom-1792512690092-ảnh chị5.jpg",
-      "./assets/sample/custom-1792512690138-ảnh chị7.jpg",
-      "./assets/sample/custom-1792512690146-ảnh chị45.jpg",
-      "./assets/sample/custom-1792512739872-ảnh chị 8.jpg",
-      "./assets/sample/custom-1792512739898-ảnh chị 54.png",
-      "./assets/sample/custom-1792512739940-ảnh chị.jpg",
-      "./assets/sample/custom-1792512739975-ảnh chị1.jpg",
-      "./assets/sample/custom-1792512740009-ảnh chị2.jpg",
-      "./assets/sample/custom-1792512740104-ảnh chị3.jpg",
-      "./assets/sample/custom-1792512740149-ảnh chị4.jpg",
-      "./assets/sample/custom-1792512740178-ảnh chị5.jpg",
-      "./assets/sample/custom-1792512740240-ảnh chị7.jpg",
-      "./assets/sample/custom-1792512740247-ảnh chị45.jpg"
+      "./assets/sample/custom-1792512690055-anh-chi4.jpg",
+      "./assets/sample/custom-1792512690092-anh-chi5.jpg",
+      "./assets/sample/custom-1792512690138-anh-chi7.jpg",
+      "./assets/sample/custom-1792512690146-anh-chi45.jpg",
+      "./assets/sample/custom-1792512739872-anh-chi-8.jpg",
+      "./assets/sample/custom-1792512739898-anh-chi-54.png",
+      "./assets/sample/custom-1792512739940-anh-chi.jpg",
+      "./assets/sample/custom-1792512739975-anh-chi1.jpg",
+      "./assets/sample/custom-1792512740009-anh-chi2.jpg",
+      "./assets/sample/custom-1792512740104-anh-chi3.jpg",
+      "./assets/sample/custom-1792512740149-anh-chi4.jpg",
+      "./assets/sample/custom-1792512740178-anh-chi5.jpg",
+      "./assets/sample/custom-1792512740240-anh-chi7.jpg",
+      "./assets/sample/custom-1792512740247-anh-chi45.jpg"
     ],
     "bgMusic": "./assets/music/tiktok-20-10.mp3",
     "showWatermark": false
