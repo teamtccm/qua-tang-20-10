@@ -127,29 +127,26 @@ async function M() {
     } catch {}
   }
 
-  // 2. Nếu có mã thiệp cụ thể trên link (VD: ?id=nguoi-1 hoặc ?nguoi-1)
-  const cardId = extractCardId();
-  if (cardId) {
-    // 2a. Tìm trong window.DANH_SACH_THIEP (cauhinh.js)
-    if (allCards && allCards[cardId]) {
+  // 2. Luôn ưu tiên tải file JSON mới nhất từ ./thiep/<id>.json (chống lưu bộ nhớ đệm trên điện thoại)
+  const cardId = extractCardId() || "macdinh";
+  try {
+    const res = await fetch(`./thiep/${encodeURIComponent(cardId)}.json?t=${Date.now()}`, { cache: "no-store" });
+    if (res.ok) {
+      const cardData = await res.json();
       return {
         trangThai: "ok",
-        config: normalizeConfigPaths({ ...baseConfig, ...allCards[cardId] }),
+        config: normalizeConfigPaths({ ...baseConfig, ...cardData }),
         diaChi
       };
     }
-    // 2b. Hoặc tải từ file ./thiep/<cardId>.json
-    try {
-      const res = await fetch(`./thiep/${encodeURIComponent(cardId)}.json?t=${Date.now()}`);
-      if (res.ok) {
-        const cardData = await res.json();
-        return {
-          trangThai: "ok",
-          config: normalizeConfigPaths({ ...baseConfig, ...cardData }),
-          diaChi
-        };
-      }
-    } catch {}
+  } catch {}
+
+  if (allCards && allCards[cardId]) {
+    return {
+      trangThai: "ok",
+      config: normalizeConfigPaths({ ...baseConfig, ...allCards[cardId] }),
+      diaChi
+    };
   }
 
   // 3. Nếu trong URL có tham số ?data= (nhúng trực tiếp dữ liệu trong link)
