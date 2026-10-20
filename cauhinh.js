@@ -1,94 +1,306 @@
 // ============================================================================
-// 🌸 FILE CẤU HÌNH THÔNG ĐIỆP QUÀ TẶNG 20/10 (DỄ DÀNG CHỈNH SỬA) 🌸
-// Bạn chỉ cần sửa nội dung chữ trong dấu ngoặc kép "..." bên dưới rồi lưu lại!
-// Hoặc mở trang ./chinh-sua.html trên trình duyệt để sửa trực quan và xuất mã QR.
+// 🌸 FILE CẤU HÌNH THÔNG ĐIỆP & DANH SÁCH NHIỀU THIỆP QR 20/10 🌸
+// 1 web duy nhất trên GitHub có thể tạo vô số mã QR khác nhau qua ?id=ma-thiep
 // ============================================================================
 
 window.CAU_HINH_QUA_TANG = {
-  // 0. MÀN MỞ ĐẦU: KHÓA MẬT KHẨU 4 SỐ & 2 CHÚ GẤU CHẠY LẠI ÔM NHAU
-  passcode: {
-    enabled: true,
-    pin: "2010",
-    title: "Nhập mật khẩu tình yêu 💖",
-    subtitle: "Nhập đúng 4 chữ số đặc biệt để 2 chú gấu gặp nhau và mở bó hoa nhé!",
-    hint: "Gợi ý: Ngày Phụ nữ Việt Nam (4 chữ số: 2010)"
+  "productType": "photobouquet",
+  "passcode": {
+    "enabled": true,
+    "pin": "2010",
+    "title": "Nhập nhanh đi bà già 💖",
+    "subtitle": "Nhập đúng 4 chữ số đặc biệt để 2 chú gấu gặp nhau và mở bó hoa nhé!",
+    "hint": "Ngày lễ của bà già đó"
   },
-
-  // 1. Bật/tắt các màn hiệu ứng
-  enableRain: true,       // Màn 2: Không gian 3D chữ & ảnh bay
-  enableLetter: true,     // Màn 3: Phong bì & bức thư tình 20/10
-  flyingHearts: true,     // Trái tim 3D màu đỏ bay cùng chữ
-  palette: "hongdon",     // Màu chữ 3D: "hongdon" (Hồng), "hong" (Hồng xanh chuyển sắc), "vang" (Vàng ấm)
-
-  // 2. CÁC CÂU CHÚC BAY TRONG KHÔNG GIAN 3D (Màn 2)
-  flyingTexts: [
-    "Chúc em luôn vui vẻ và hạnh phúc",
-    "Chúc em luôn xinh đẹp",
-    "Chúc em luôn yêu đời",
-    "Chúc mừng ngày phụ nữ Việt Nam",
-    "20/10",
-    "yêu em",
-    "Chúc em thật nhiều may mắn",
-    "mãi yêu em",
-    "Mong mọi điều dịu dàng sẽ đến với em"
+  "enableRain": true,
+  "enableLetter": true,
+  "flyingHearts": true,
+  "palette": "hongdon",
+  "flyingTexts": [
+    "Chúc chị yêu 20/10 luôn tươi xắn, đợt săn tín chỉ nào cũng thành công mà không cần \"cứu viện\"! Chứ deadline có dí thì đã có em đứng ra gánh hộ chị rồi nè!",
+    "Chúc em bé tân sinh viên 20/10 thật nhiều niềm vui, xinh đẹp rực rỡ và ăn ngon ngủ kỹ.",
+    "Chúc nàng thơ của em 20/10 luôn rạng rỡ, tiền đầy túi, tình đầy tim và không lo xẹp ví. Học đại học có mệt quá thì nhớ quay sang ôm em một cái để sạc đầy năng lượng nhé!(miễn chị có thể xún đâyy)",
+    "20/10 chúc em bé 2k8 luôn xinh xắn như hoa vĩnh cửu, cười nhiều và thi môn nào cũng qua ngơ ngác!",
+    "Chúc chị yêu 20/10 nhận được vô vàn niềm vui, ăn uống xả láng mà vóc dáng vẫn chuẩn xinh. Cần người tháp tùng càn quét hết các quán ăn vặt cổng trường thì call me hỏa tốc nha!",
+    "Chúc em bé năm nhất luôn là cô gái năng động và rực rỡ nhất.",
+    "Chúc thợ săn đi học không bao giờ bị điểm danh đột xuất.",
+    "Chúc chị mở mắt ra thấy niềm vui, mở tủ ra có đồ đẹp. Và mỗi lần mở tin nhắn ra là thấy em đang đợi chị đi ăn trà sữa đó nha!",
+    "Chúc tân sinh viên nhà em học đâu hiểu đó, thi đâu đậu đó ! Luôn giữ nụ cười rạng rỡ vì phía sau chị lúc nào cũng có em cưng chiều hết nấc.",
+    "Chúc chị luôn xinh đẹp rạng ngời, đi học bớt ngủ gật trong giờ nhé.",
+    "Cứ vô tư làm nũng đi nhé, vì nhiệm vụ của em là dung nuông chị suốt cả 4 năm đại học mà!",
+    "Chúc chị yêu luôn tươi như hoa không tàn, học đại học nhàn tênh và nhiều kỷ niệm đẹp.",
+    "Thợ săn ơi chúc chị nhận được cả bầu trời yêu thương, thi cử mượt mà như dùng hack điểm.",
+    "Chúc chị bớt ngỡ ngàng với lời đồn \"đại học nhàn lắm\" và luôn vượt qua dễ dàng.",
+    "Có khó khăn gì cứ gọi em, đặc vụ riêng của chị sẵn sàng cứu nguy 24/7",
+    "Mong chị năm nhất học hành siêu mượt và luôn là em bé hạnh phúc nhất trên đời!",
+    "Chúc em bé của em xinh đẹp xuất sắc, ra đường ai cũng trầm trồ nhưng chỉ được nhìn một mình em thôi.",
+    "Lần sau đi học có lỡ ngủ gật trong giờ thì nhớ kê tay em cho đỡ đau cổ nhé! Nhưng đón em lên đi cùng là đựơc",
+    "Chúc em bé 2k8 20/10 ngọt ngào như ly trà sữa 100% đường, xinh đẹp ngút ngàn và học hành thăng hoa.",
+    "Nếu có giận dỗi em thì giận chút xíu thôi nha, vì em yêu chị nhiều nhất trên đời đó!",
+    "Mong tuổi 18 đại học của chị thật rực rỡ, và điều tuyệt vời nhất là luôn có em đồng hành!",
+    "Chúc em bé năm nhất đi săn tín chỉ thành công, đi học không dầm mưa ướt áo.",
+    "Nếu cảm thấy mệt mỏi với đống giáo trình thì hãy nhớ rằng em luôn chờ để bao chị ăn ngon!",
+    "Luôn là cô gái tự tin, cá tính và nhớ là em thương chị nhiều hơn cả thương thân mình đấy!",
+    "Bài tập nhóm có khó thì cứ trút giận lên em, em nhận hết miễn chị luôn cười tươi!",
+    "Nếu học bổng khó quá thì rinh em về nuôi, em nguyện làm \"phần thưởng\" ngoan ngoãn cho chị.",
+    "Cảm ơn chị đã xuất hiện và làm cho thế giới của em trở nên ngọt ngào hơn bao giờ hết!",
+    "Bạn đã gửi",
+    "Chúc chị iu tiền vào như nước tiền ra túi mình"
   ],
-
-  // 3. NỘI DUNG PHONG BÌ & BỨC THƯ TÌNH (Màn 3 - Khi bấm vào icon Phong Bì góc phải)
-  letter: {
-    envelope: {
-      topLine: "Dành tặng em",
-      headline: "20/10",
-      bottomLine: "Một chút yêu thương"
+  "letter": {
+    "envelope": {
+      "topLine": "Dành cho chị",
+      "headline": "20/10",
+      "bottomLine": "Lời ngỏ hihi"
     },
-    text: `Gửi cô gái bé nhỏ của anh 🤍
-
-Anh chúc em ngày 20/10 lúc nào cũng xinh đẹp, may mắn, nhiều sức khỏe và lúc nào cũng vui vẻ. Anh mong rằng em sẽ đồng hành cùng anh trên chặng đường phía trước.
-
-Cảm ơn em vì tất cả. 🫶
-Anh yêu em bé của anh.`,
-    photo: "./assets/sample/bouquet-4.webp"
+    "text": "Gửi chị iu thợ săn cún và hhn\nNhân 20-10 em chút Giang iu bóng bẻ luôn xinh đẹp, đáng yêu. Dịu dang với em và tbm với cả thế giới\nGiang và tui mới quen nhau thôi và còn quen qua mạng nữa. Tuy không biết sẽ tới đâu nhưng hiện tại em vẫn cảm thấy rất vui vì có Giangở bên\n\nCún cảm ơn Giang nhìuuu ạ",
+    "photo": "./assets/sample/custom-1792512780851-ảnh chị 54.png"
   },
-
-  // 4. HỘP QUÀ BÍ MẬT CUỐI BỨC THƯ — BỐC THĂM "VOUCHER TÌNH YÊU"
-  vouchers: {
-    enabled: true,
-    buttonText: "🎁 Mở Hộp Quà Bí Mật 20/10",
-    modalTitle: "🎁 Bốc Thăm Hộp Quà Bí Mật 20/10",
-    modalSubtitle: "Chạm vào 1 trong 3 hộp quà bên dưới để nhận phần thưởng đặc quyền từ anh nhé!",
-    items: [
+  "vouchers": {
+    "enabled": false,
+    "buttonText": "🎁 Mở Hộp Quà Bí Mật 20/10",
+    "modalTitle": "🎁 Bốc Thăm Hộp Quà Bí Mật 20/10",
+    "modalSubtitle": "Chạm vào 1 trong 3 hộp quà bên dưới để nhận phần thưởng đặc quyền từ anh nhé!",
+    "items": [
       "🎟️ Voucher Ăn Tối Lãng Mạn: 1 buổi đi ăn đồ nướng / lẩu bất kỳ do em chọn, anh bao trọn gói 100%!",
       "🧋 Thẻ Quyền Lực Trà Sữa & Đồ Ngọt: Miễn phí trà sữa full topping + bánh ngọt suốt cả tuần lễ 20/10!",
       "👗 Phiếu Mua Sắm Công Chúa: Chốt đơn ngay 1 món đồ bất kỳ trong giỏ hàng Shopee / TikTok Shop của em!"
     ]
   },
-
-  // 5. ẢNH NỞ RA TRONG BÓ HOA (Màn 1 - Tối đa 6 ảnh)
-  bouquetImages: [
-    "./assets/sample/bouquet-1.webp",
-    "./assets/sample/bouquet-2.webp",
-    "./assets/sample/bouquet-3.webp",
-    "./assets/sample/bouquet-4.webp",
-    "./assets/sample/bouquet-5.webp",
-    "./assets/sample/bouquet-6.webp"
+  "bouquetImages": [
+    "./assets/sample/custom-1792512689666-ảnh chị 8.jpg",
+    "./assets/sample/custom-1792512689703-ảnh chị 54.png",
+    "./assets/sample/custom-1792512689878-ảnh chị.jpg",
+    "./assets/sample/custom-1792512689918-ảnh chị1.jpg",
+    "./assets/sample/custom-1792512689970-ảnh chị2.jpg",
+    "./assets/sample/custom-1792512690014-ảnh chị3.jpg"
   ],
-  bouquetCutouts: [true, true, true, true, true, true],
-
-  // 6. ẢNH KỶ NIỆM BAY TRONG KHÔNG GIAN 3D (Màn 2 - Tối đa 10 ảnh)
-  flyingImages: [
-    "./assets/sample/flying-1.webp",
-    "./assets/sample/flying-2.webp",
-    "./assets/sample/flying-3.webp",
-    "./assets/sample/flying-4.webp",
-    "./assets/sample/flying-5.webp",
-    "./assets/sample/flying-6.webp",
-    "./assets/sample/flying-7.webp",
-    "./assets/sample/flying-8.webp",
-    "./assets/sample/flying-9.webp",
-    "./assets/sample/flying-10.webp"
+  "bouquetCutouts": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
   ],
+  "flyingImages": [
+    "./assets/sample/custom-1792512690055-ảnh chị4.jpg",
+    "./assets/sample/custom-1792512690092-ảnh chị5.jpg",
+    "./assets/sample/custom-1792512690138-ảnh chị7.jpg",
+    "./assets/sample/custom-1792512690146-ảnh chị45.jpg",
+    "./assets/sample/custom-1792512739872-ảnh chị 8.jpg",
+    "./assets/sample/custom-1792512739898-ảnh chị 54.png",
+    "./assets/sample/custom-1792512739940-ảnh chị.jpg",
+    "./assets/sample/custom-1792512739975-ảnh chị1.jpg",
+    "./assets/sample/custom-1792512740009-ảnh chị2.jpg",
+    "./assets/sample/custom-1792512740104-ảnh chị3.jpg",
+    "./assets/sample/custom-1792512740149-ảnh chị4.jpg",
+    "./assets/sample/custom-1792512740178-ảnh chị5.jpg",
+    "./assets/sample/custom-1792512740240-ảnh chị7.jpg",
+    "./assets/sample/custom-1792512740247-ảnh chị45.jpg"
+  ],
+  "bgMusic": "./assets/music/tiktok-20-10.mp3",
+  "showWatermark": false
+};
 
-  // 7. NHẠC NỀN PHÁT TỰ ĐỘNG KHI MỞ HOA
-  bgMusic: "./assets/music/tiktok-20-10.mp3",
-
-  showWatermark: false
+// Danh sách các thiệp riêng biệt (Truy cập qua: index.html?id=ten-thiep hoặc index.html?ten-thiep)
+window.DANH_SACH_THIEP = {
+  "chi-giang": {
+    "productType": "photobouquet",
+    "passcode": {
+      "enabled": true,
+      "pin": "2010",
+      "title": "Nhập nhanh đi bà già 💖",
+      "subtitle": "Nhập đúng 4 chữ số đặc biệt để 2 chú gấu gặp nhau và mở bó hoa nhé!",
+      "hint": "Ngày lễ của bà già đó"
+    },
+    "enableRain": true,
+    "enableLetter": true,
+    "flyingHearts": true,
+    "palette": "hongdon",
+    "flyingTexts": [
+      "Chúc chị yêu 20/10 luôn tươi xắn, đợt săn tín chỉ nào cũng thành công mà không cần \"cứu viện\"! Chứ deadline có dí thì đã có em đứng ra gánh hộ chị rồi nè!",
+      "Chúc em bé tân sinh viên 20/10 thật nhiều niềm vui, xinh đẹp rực rỡ và ăn ngon ngủ kỹ.",
+      "Chúc nàng thơ của em 20/10 luôn rạng rỡ, tiền đầy túi, tình đầy tim và không lo xẹp ví. Học đại học có mệt quá thì nhớ quay sang ôm em một cái để sạc đầy năng lượng nhé!(miễn chị có thể xún đâyy)",
+      "20/10 chúc em bé 2k8 luôn xinh xắn như hoa vĩnh cửu, cười nhiều và thi môn nào cũng qua ngơ ngác!",
+      "Chúc chị yêu 20/10 nhận được vô vàn niềm vui, ăn uống xả láng mà vóc dáng vẫn chuẩn xinh. Cần người tháp tùng càn quét hết các quán ăn vặt cổng trường thì call me hỏa tốc nha!",
+      "Chúc em bé năm nhất luôn là cô gái năng động và rực rỡ nhất.",
+      "Chúc thợ săn đi học không bao giờ bị điểm danh đột xuất.",
+      "Chúc chị mở mắt ra thấy niềm vui, mở tủ ra có đồ đẹp. Và mỗi lần mở tin nhắn ra là thấy em đang đợi chị đi ăn trà sữa đó nha!",
+      "Chúc tân sinh viên nhà em học đâu hiểu đó, thi đâu đậu đó ! Luôn giữ nụ cười rạng rỡ vì phía sau chị lúc nào cũng có em cưng chiều hết nấc.",
+      "Chúc chị luôn xinh đẹp rạng ngời, đi học bớt ngủ gật trong giờ nhé.",
+      "Cứ vô tư làm nũng đi nhé, vì nhiệm vụ của em là dung nuông chị suốt cả 4 năm đại học mà!",
+      "Chúc chị yêu luôn tươi như hoa không tàn, học đại học nhàn tênh và nhiều kỷ niệm đẹp.",
+      "Thợ săn ơi chúc chị nhận được cả bầu trời yêu thương, thi cử mượt mà như dùng hack điểm.",
+      "Chúc chị bớt ngỡ ngàng với lời đồn \"đại học nhàn lắm\" và luôn vượt qua dễ dàng.",
+      "Có khó khăn gì cứ gọi em, đặc vụ riêng của chị sẵn sàng cứu nguy 24/7",
+      "Mong chị năm nhất học hành siêu mượt và luôn là em bé hạnh phúc nhất trên đời!",
+      "Chúc em bé của em xinh đẹp xuất sắc, ra đường ai cũng trầm trồ nhưng chỉ được nhìn một mình em thôi.",
+      "Lần sau đi học có lỡ ngủ gật trong giờ thì nhớ kê tay em cho đỡ đau cổ nhé! Nhưng đón em lên đi cùng là đựơc",
+      "Chúc em bé 2k8 20/10 ngọt ngào như ly trà sữa 100% đường, xinh đẹp ngút ngàn và học hành thăng hoa.",
+      "Nếu có giận dỗi em thì giận chút xíu thôi nha, vì em yêu chị nhiều nhất trên đời đó!",
+      "Mong tuổi 18 đại học của chị thật rực rỡ, và điều tuyệt vời nhất là luôn có em đồng hành!",
+      "Chúc em bé năm nhất đi săn tín chỉ thành công, đi học không dầm mưa ướt áo.",
+      "Nếu cảm thấy mệt mỏi với đống giáo trình thì hãy nhớ rằng em luôn chờ để bao chị ăn ngon!",
+      "Luôn là cô gái tự tin, cá tính và nhớ là em thương chị nhiều hơn cả thương thân mình đấy!",
+      "Bài tập nhóm có khó thì cứ trút giận lên em, em nhận hết miễn chị luôn cười tươi!",
+      "Nếu học bổng khó quá thì rinh em về nuôi, em nguyện làm \"phần thưởng\" ngoan ngoãn cho chị.",
+      "Cảm ơn chị đã xuất hiện và làm cho thế giới của em trở nên ngọt ngào hơn bao giờ hết!",
+      "Bạn đã gửi",
+      "Chúc chị iu tiền vào như nước tiền ra túi mình"
+    ],
+    "letter": {
+      "envelope": {
+        "topLine": "Dành cho chị",
+        "headline": "20/10",
+        "bottomLine": "Lời ngỏ hihi"
+      },
+      "text": "Gửi chị iu thợ săn cún và hhn\nNhân 20-10 em chút Giang iu bóng bẻ luôn xinh đẹp, đáng yêu. Dịu dang với em và tbm với cả thế giới\nGiang và tui mới quen nhau thôi và còn quen qua mạng nữa. Tuy không biết sẽ tới đâu nhưng hiện tại em vẫn cảm thấy rất vui vì có Giangở bên\n\nCún cảm ơn Giang nhìuuu ạ",
+      "photo": "./assets/sample/custom-1792512780851-ảnh chị 54.png"
+    },
+    "vouchers": {
+      "enabled": false,
+      "buttonText": "🎁 Mở Hộp Quà Bí Mật 20/10",
+      "modalTitle": "🎁 Bốc Thăm Hộp Quà Bí Mật 20/10",
+      "modalSubtitle": "Chạm vào 1 trong 3 hộp quà bên dưới để nhận phần thưởng đặc quyền từ anh nhé!",
+      "items": [
+        "🎟️ Voucher Ăn Tối Lãng Mạn: 1 buổi đi ăn đồ nướng / lẩu bất kỳ do em chọn, anh bao trọn gói 100%!",
+        "🧋 Thẻ Quyền Lực Trà Sữa & Đồ Ngọt: Miễn phí trà sữa full topping + bánh ngọt suốt cả tuần lễ 20/10!",
+        "👗 Phiếu Mua Sắm Công Chúa: Chốt đơn ngay 1 món đồ bất kỳ trong giỏ hàng Shopee / TikTok Shop của em!"
+      ]
+    },
+    "bouquetImages": [
+      "./assets/sample/custom-1792512689666-ảnh chị 8.jpg",
+      "./assets/sample/custom-1792512689703-ảnh chị 54.png",
+      "./assets/sample/custom-1792512689878-ảnh chị.jpg",
+      "./assets/sample/custom-1792512689918-ảnh chị1.jpg",
+      "./assets/sample/custom-1792512689970-ảnh chị2.jpg",
+      "./assets/sample/custom-1792512690014-ảnh chị3.jpg"
+    ],
+    "bouquetCutouts": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "flyingImages": [
+      "./assets/sample/custom-1792512690055-ảnh chị4.jpg",
+      "./assets/sample/custom-1792512690092-ảnh chị5.jpg",
+      "./assets/sample/custom-1792512690138-ảnh chị7.jpg",
+      "./assets/sample/custom-1792512690146-ảnh chị45.jpg",
+      "./assets/sample/custom-1792512739872-ảnh chị 8.jpg",
+      "./assets/sample/custom-1792512739898-ảnh chị 54.png",
+      "./assets/sample/custom-1792512739940-ảnh chị.jpg",
+      "./assets/sample/custom-1792512739975-ảnh chị1.jpg",
+      "./assets/sample/custom-1792512740009-ảnh chị2.jpg",
+      "./assets/sample/custom-1792512740104-ảnh chị3.jpg",
+      "./assets/sample/custom-1792512740149-ảnh chị4.jpg",
+      "./assets/sample/custom-1792512740178-ảnh chị5.jpg",
+      "./assets/sample/custom-1792512740240-ảnh chị7.jpg",
+      "./assets/sample/custom-1792512740247-ảnh chị45.jpg"
+    ],
+    "bgMusic": "./assets/music/tiktok-20-10.mp3",
+    "showWatermark": false
+  },
+  "macdinh": {
+    "productType": "photobouquet",
+    "passcode": {
+      "enabled": true,
+      "pin": "2010",
+      "title": "Nhập nhanh đi bà già 💖",
+      "subtitle": "Nhập đúng 4 chữ số đặc biệt để 2 chú gấu gặp nhau và mở bó hoa nhé!",
+      "hint": "Ngày lễ của bà già đó"
+    },
+    "enableRain": true,
+    "enableLetter": true,
+    "flyingHearts": true,
+    "palette": "hongdon",
+    "flyingTexts": [
+      "Chúc chị yêu 20/10 luôn tươi xắn, đợt săn tín chỉ nào cũng thành công mà không cần \"cứu viện\"! Chứ deadline có dí thì đã có em đứng ra gánh hộ chị rồi nè!",
+      "Chúc em bé tân sinh viên 20/10 thật nhiều niềm vui, xinh đẹp rực rỡ và ăn ngon ngủ kỹ.",
+      "Chúc nàng thơ của em 20/10 luôn rạng rỡ, tiền đầy túi, tình đầy tim và không lo xẹp ví. Học đại học có mệt quá thì nhớ quay sang ôm em một cái để sạc đầy năng lượng nhé!(miễn chị có thể xún đâyy)",
+      "20/10 chúc em bé 2k8 luôn xinh xắn như hoa vĩnh cửu, cười nhiều và thi môn nào cũng qua ngơ ngác!",
+      "Chúc chị yêu 20/10 nhận được vô vàn niềm vui, ăn uống xả láng mà vóc dáng vẫn chuẩn xinh. Cần người tháp tùng càn quét hết các quán ăn vặt cổng trường thì call me hỏa tốc nha!",
+      "Chúc em bé năm nhất luôn là cô gái năng động và rực rỡ nhất.",
+      "Chúc thợ săn đi học không bao giờ bị điểm danh đột xuất.",
+      "Chúc chị mở mắt ra thấy niềm vui, mở tủ ra có đồ đẹp. Và mỗi lần mở tin nhắn ra là thấy em đang đợi chị đi ăn trà sữa đó nha!",
+      "Chúc tân sinh viên nhà em học đâu hiểu đó, thi đâu đậu đó ! Luôn giữ nụ cười rạng rỡ vì phía sau chị lúc nào cũng có em cưng chiều hết nấc.",
+      "Chúc chị luôn xinh đẹp rạng ngời, đi học bớt ngủ gật trong giờ nhé.",
+      "Cứ vô tư làm nũng đi nhé, vì nhiệm vụ của em là dung nuông chị suốt cả 4 năm đại học mà!",
+      "Chúc chị yêu luôn tươi như hoa không tàn, học đại học nhàn tênh và nhiều kỷ niệm đẹp.",
+      "Thợ săn ơi chúc chị nhận được cả bầu trời yêu thương, thi cử mượt mà như dùng hack điểm.",
+      "Chúc chị bớt ngỡ ngàng với lời đồn \"đại học nhàn lắm\" và luôn vượt qua dễ dàng.",
+      "Có khó khăn gì cứ gọi em, đặc vụ riêng của chị sẵn sàng cứu nguy 24/7",
+      "Mong chị năm nhất học hành siêu mượt và luôn là em bé hạnh phúc nhất trên đời!",
+      "Chúc em bé của em xinh đẹp xuất sắc, ra đường ai cũng trầm trồ nhưng chỉ được nhìn một mình em thôi.",
+      "Lần sau đi học có lỡ ngủ gật trong giờ thì nhớ kê tay em cho đỡ đau cổ nhé! Nhưng đón em lên đi cùng là đựơc",
+      "Chúc em bé 2k8 20/10 ngọt ngào như ly trà sữa 100% đường, xinh đẹp ngút ngàn và học hành thăng hoa.",
+      "Nếu có giận dỗi em thì giận chút xíu thôi nha, vì em yêu chị nhiều nhất trên đời đó!",
+      "Mong tuổi 18 đại học của chị thật rực rỡ, và điều tuyệt vời nhất là luôn có em đồng hành!",
+      "Chúc em bé năm nhất đi săn tín chỉ thành công, đi học không dầm mưa ướt áo.",
+      "Nếu cảm thấy mệt mỏi với đống giáo trình thì hãy nhớ rằng em luôn chờ để bao chị ăn ngon!",
+      "Luôn là cô gái tự tin, cá tính và nhớ là em thương chị nhiều hơn cả thương thân mình đấy!",
+      "Bài tập nhóm có khó thì cứ trút giận lên em, em nhận hết miễn chị luôn cười tươi!",
+      "Nếu học bổng khó quá thì rinh em về nuôi, em nguyện làm \"phần thưởng\" ngoan ngoãn cho chị.",
+      "Cảm ơn chị đã xuất hiện và làm cho thế giới của em trở nên ngọt ngào hơn bao giờ hết!",
+      "Bạn đã gửi",
+      "Chúc chị iu tiền vào như nước tiền ra túi mình"
+    ],
+    "letter": {
+      "envelope": {
+        "topLine": "Dành cho chị",
+        "headline": "20/10",
+        "bottomLine": "Lời ngỏ hihi"
+      },
+      "text": "Gửi chị iu thợ săn cún và hhn\nNhân 20-10 em chút Giang iu bóng bẻ luôn xinh đẹp, đáng yêu. Dịu dang với em và tbm với cả thế giới\nGiang và tui mới quen nhau thôi và còn quen qua mạng nữa. Tuy không biết sẽ tới đâu nhưng hiện tại em vẫn cảm thấy rất vui vì có Giangở bên\n\nCún cảm ơn Giang nhìuuu ạ",
+      "photo": "./assets/sample/custom-1792512780851-ảnh chị 54.png"
+    },
+    "vouchers": {
+      "enabled": false,
+      "buttonText": "🎁 Mở Hộp Quà Bí Mật 20/10",
+      "modalTitle": "🎁 Bốc Thăm Hộp Quà Bí Mật 20/10",
+      "modalSubtitle": "Chạm vào 1 trong 3 hộp quà bên dưới để nhận phần thưởng đặc quyền từ anh nhé!",
+      "items": [
+        "🎟️ Voucher Ăn Tối Lãng Mạn: 1 buổi đi ăn đồ nướng / lẩu bất kỳ do em chọn, anh bao trọn gói 100%!",
+        "🧋 Thẻ Quyền Lực Trà Sữa & Đồ Ngọt: Miễn phí trà sữa full topping + bánh ngọt suốt cả tuần lễ 20/10!",
+        "👗 Phiếu Mua Sắm Công Chúa: Chốt đơn ngay 1 món đồ bất kỳ trong giỏ hàng Shopee / TikTok Shop của em!"
+      ]
+    },
+    "bouquetImages": [
+      "./assets/sample/custom-1792512689666-ảnh chị 8.jpg",
+      "./assets/sample/custom-1792512689703-ảnh chị 54.png",
+      "./assets/sample/custom-1792512689878-ảnh chị.jpg",
+      "./assets/sample/custom-1792512689918-ảnh chị1.jpg",
+      "./assets/sample/custom-1792512689970-ảnh chị2.jpg",
+      "./assets/sample/custom-1792512690014-ảnh chị3.jpg"
+    ],
+    "bouquetCutouts": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "flyingImages": [
+      "./assets/sample/custom-1792512690055-ảnh chị4.jpg",
+      "./assets/sample/custom-1792512690092-ảnh chị5.jpg",
+      "./assets/sample/custom-1792512690138-ảnh chị7.jpg",
+      "./assets/sample/custom-1792512690146-ảnh chị45.jpg",
+      "./assets/sample/custom-1792512739872-ảnh chị 8.jpg",
+      "./assets/sample/custom-1792512739898-ảnh chị 54.png",
+      "./assets/sample/custom-1792512739940-ảnh chị.jpg",
+      "./assets/sample/custom-1792512739975-ảnh chị1.jpg",
+      "./assets/sample/custom-1792512740009-ảnh chị2.jpg",
+      "./assets/sample/custom-1792512740104-ảnh chị3.jpg",
+      "./assets/sample/custom-1792512740149-ảnh chị4.jpg",
+      "./assets/sample/custom-1792512740178-ảnh chị5.jpg",
+      "./assets/sample/custom-1792512740240-ảnh chị7.jpg",
+      "./assets/sample/custom-1792512740247-ảnh chị45.jpg"
+    ],
+    "bgMusic": "./assets/music/tiktok-20-10.mp3",
+    "showWatermark": false
+  }
 };
